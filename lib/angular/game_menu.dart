@@ -1,5 +1,5 @@
 import 'package:angular/angular.dart';
-import 'package:gamejam_template/angular/game_service.dart';
+import 'package:minibeansjam6/angular/game_service.dart';
 
 @Component(
   selector: 'game-menu',

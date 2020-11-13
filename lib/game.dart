@@ -8,7 +8,7 @@ import 'html/rendering/position_rendering_system.dart';
 
 class Game extends GameBase {
   final GameStateManager gameStateManager;
-  Game(this.gameStateManager) : super.noAssets('%game_dir%', 'canvas#game');
+  Game(this.gameStateManager) : super.noAssets('minibeansjam6', 'canvas#game');
 
   @override
   void createEntities() {

@@ -1,5 +1,5 @@
-# %game_name% for %gamejam_name%
+# %game_name% for miniBeansjam 6
 
-## Theme: %gamejam_theme%
+## Theme: Du bewegst die Welt
 
-[Play here](https://kayzgames.github.io/%game_dir%)
+[Play here](https://kayzgames.github.io/minibeansjam6)
