@@ -1,0 +1,72 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+  height: 350px;
+  padding: 15px;
+  border-radius: 25px;
+  background-color: rgba(0, 32, 63, 0.75);
+  color: #adefd1;
+  border: 2px solid #adefd180;
+
+  > header {
+    display: flex;
+    justify-content: center;
+  }
+
+  > main {
+    display: flex;
+    justify-content: space-between;
+    height: 80%;
+
+    > section {
+      > button {
+        // https://css-tricks.com/overriding-default-button-styles/
+        font-family: inherit;
+        font-size: 100%;
+        line-height: 1.15;
+        overflow: visible;
+        text-transform: none;
+        -webkit-appearance: button;
+      }
+
+      > button {
+        margin: 30px;
+        width: 90px;
+        height: 90px;
+        border-radius: 50px;
+        background: radial-gradient(hsl(120, 90%, 45%), hsl(120, 90%, 50%));
+        border: 4px solid hsl(120, 90%, 30%);
+        outline: none;
+        opacity: 0.9;
+        font-size: 20px;
+        font-weight: bold;
+
+        &:hover {
+          background: radial-gradient(hsl(120, 100%, 55%), hsl(120, 100%, 60%));
+          border: 4px solid hsl(120, 90%, 40%);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  > footer {
+    display: flex;
+    justify-content: flex-end;
+
+    > a {
+      color: grey;
+      text-decoration: none;
+
+      &:visited {
+        color: darkgray;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

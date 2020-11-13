@@ -1,0 +1,15 @@
+<header><h2>%game_name%</h2></header>
+<main *ngIf='!error'>
+  <section>
+    <h3>Controls</h3>
+    <ul>
+      <li>Movement: WASD/🡅🡄🡇🡆</li>
+    </ul>
+  </section>
+  <section>
+    <button (click)='startGame()' *ngIf='gameCanStart'>Start Game</button>
+  </section>
+</main>
+<div *ngIf='error'>{{errorMessage}}</div>
+<pre *ngIf='error'>{{stackTrace}}</pre>
+<footer><a href='%gamejam_link%' target='_blank'>%gamejam_name%</a></footer>
