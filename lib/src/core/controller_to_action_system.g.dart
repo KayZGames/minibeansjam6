@@ -9,6 +9,7 @@ part of 'controller_to_action_system.dart';
 abstract class _$ControllerToActionSystem extends EntityProcessingSystem {
   Mapper<Controller> controllerMapper;
   Mapper<Position> positionMapper;
+  LevelManager levelManager;
   _$ControllerToActionSystem()
       : super(Aspect.empty()..allOf([Controller, Position]));
   @override
@@ -16,5 +17,6 @@ abstract class _$ControllerToActionSystem extends EntityProcessingSystem {
     super.initialize();
     controllerMapper = Mapper<Controller>(world);
     positionMapper = Mapper<Position>(world);
+    levelManager = world.getManager<LevelManager>();
   }
 }

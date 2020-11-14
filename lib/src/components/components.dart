@@ -2,18 +2,18 @@ import 'package:dartemis/dartemis.dart';
 
 class Controller extends Component {
   bool up, down, left, right;
-  bool isMoving;
+  PlayerState state;
 
   Controller({
     this.up = false,
     this.down = false,
     this.left = false,
     this.right = false,
-    this.isMoving = false,
+    this.state = PlayerState.stay,
   });
 
   void reset() {
-    if (!isMoving) {
+    if (state == PlayerState.stay) {
       up = false;
       down = false;
       left = false;
@@ -21,3 +21,7 @@ class Controller extends Component {
     }
   }
 }
+
+class Nebula extends Component {}
+
+enum PlayerState { stay, move, push, eat }

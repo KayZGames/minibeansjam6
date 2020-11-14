@@ -16,24 +16,16 @@ class ControllerSystem extends _$ControllerSystem {
 
   @override
   void processEntity(int entity) {
-    final c = controllerMapper[entity]..reset();
-    if (!c.isMoving) {
+    final controller = controllerMapper[entity]..reset();
+    if (controller.state == PlayerState.stay) {
       if (up) {
-        c
-          ..up = true
-          ..isMoving = true;
+        controller.up = true;
       } else if (down) {
-        c
-          ..down = true
-          ..isMoving = true;
+        controller.down = true;
       } else if (left) {
-        c
-          ..left = true
-          ..isMoving = true;
+        controller.left = true;
       } else if (right) {
-        c
-          ..right = true
-          ..isMoving = true;
+        controller.right = true;
       }
     }
   }
