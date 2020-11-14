@@ -33,12 +33,15 @@ abstract class _$CanFallPhysicsSystem extends PhysicsSystem {
 
 abstract class _$CanRollPhysicsSystem extends PhysicsSystem {
   Mapper<CanRoll> canRollMapper;
+  Mapper<Orientation> orientationMapper;
   LevelManager levelManager;
-  _$CanRollPhysicsSystem() : super(Aspect.empty()..allOf([CanRoll]));
+  _$CanRollPhysicsSystem()
+      : super(Aspect.empty()..allOf([CanRoll, Orientation]));
   @override
   void initialize() {
     super.initialize();
     canRollMapper = Mapper<CanRoll>(world);
+    orientationMapper = Mapper<Orientation>(world);
     levelManager = world.getManager<LevelManager>();
   }
 }

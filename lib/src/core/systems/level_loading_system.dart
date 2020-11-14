@@ -76,7 +76,8 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
         }
         final components = [
           Position(x.toDouble(), y.toDouble()),
-          Renderable(spriteSheet, type)
+          Renderable(spriteSheet, type),
+          Orientation(0),
         ];
         switch (field.object) {
           case LevelObject.atlas:

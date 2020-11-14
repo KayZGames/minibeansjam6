@@ -92,6 +92,7 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
   PhysicsSystem,
   allOf: [
     CanRoll,
+    Orientation,
   ],
   manager: [
     LevelManager,
@@ -124,6 +125,7 @@ class CanRollPhysicsSystem extends _$CanRollPhysicsSystem {
         canRoll.rollingRight = _startRolling(entity, position, 1);
       }
     }
+    orientationMapper[entity].angle = 2 * pi * (position.x % 1);
   }
 
   bool _startRolling(int entity, Position position, int moveX) {

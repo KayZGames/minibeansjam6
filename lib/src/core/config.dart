@@ -1,1 +1,1 @@
-const double movementSpeed = 10;
+const double movementSpeed = 7.5;
