@@ -72,21 +72,37 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
             throw Exception(
                 'unkonw tile $levelColumn@$x:$y in ${levelAsset.assetId}');
         }
+        final components = [
+          Position(x.toDouble(), y.toDouble()),
+          Renderable(spriteSheet, type)
+        ];
+        switch (field.object) {
+          case LevelObject.atlas:
+            components.addAll([
+              Controller(),
+              Camera(),
+            ]);
+            break;
+          case LevelObject.bean:
+            components.addAll([CanFall(), CanRoll(), CanBeConsumed()]);
+            break;
+          case LevelObject.world:
+            components.addAll([CanFall(), CanRoll(), CanBePushed()]);
+            break;
+          case LevelObject.nebula:
+            components.addAll([CanBeConsumed()]);
+            break;
+          case LevelObject.empty:
+          case LevelObject.border:
+          case LevelObject.star:
+          case LevelObject.end:
+          case LevelObject.ghost:
+            break;
+        }
+        final entity = world.createEntity(components);
+        field.entity = entity;
         if (type == 'atlas') {
-          final player = world.createEntity([
-            Controller(),
-            Camera(),
-            Position(x.toDouble(), y.toDouble()),
-            Renderable(spriteSheet, type),
-          ]);
-          tagManager.register(player, cameraTag);
-          field.entity = player;
-        } else {
-          final entity = world.createEntity([
-            Position(x.toDouble(), y.toDouble()),
-            Renderable(spriteSheet, type),
-          ]);
-          field.entity = entity;
+          tagManager.register(entity, cameraTag);
         }
         x++;
       }

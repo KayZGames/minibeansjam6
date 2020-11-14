@@ -2,8 +2,6 @@ import 'dart:html';
 
 import 'package:gamedev_helpers/gamedev_helpers.dart';
 
-import '../../components/components.dart';
-
 part 'sprite_rendering_system.g.dart';
 
 @Generate(
@@ -17,7 +15,7 @@ part 'sprite_rendering_system.g.dart';
     CameraManager,
   ],
 )
-abstract class SpriteRenderingSystem extends _$SpriteRenderingSystem {
+class SpriteRenderingSystem extends _$SpriteRenderingSystem {
   Position _cameraPosition;
   CanvasRenderingContext2D ctx;
   SpriteSheet sheet;
@@ -55,15 +53,4 @@ abstract class SpriteRenderingSystem extends _$SpriteRenderingSystem {
         sprite.dst.width,
         sprite.dst.height);
   }
-}
-
-@Generate(
-  SpriteRenderingSystem,
-  allOf: [
-    Nebula,
-  ],
-)
-class NebulaRenderingSystem extends _$NebulaRenderingSystem {
-  NebulaRenderingSystem(CanvasRenderingContext2D ctx, SpriteSheet sheet)
-      : super(ctx, sheet);
 }

@@ -1,7 +1,9 @@
 import 'package:dartemis/dartemis.dart';
 import 'package:gamedev_helpers/gamedev_helpers_shared.dart';
-import 'package:minibeansjam6/src/core/managers/level_manager.dart';
-import '../components/components.dart';
+
+import '../../components/components.dart';
+import '../config.dart';
+import '../managers/level_manager.dart';
 
 part 'controller_to_action_system.g.dart';
 
@@ -16,8 +18,6 @@ part 'controller_to_action_system.g.dart';
   ],
 )
 class ControllerToActionSystem extends _$ControllerToActionSystem {
-  final _velocity = 10.0;
-
   @override
   void processEntity(int entity) {
     final controller = controllerMapper[entity];
@@ -41,20 +41,28 @@ class ControllerToActionSystem extends _$ControllerToActionSystem {
       if (controller.state == PlayerState.eat) {
         levelManager.eat(position.x.floor(), position.y.floor(), moveX, moveY);
       }
+      if (controller.state != PlayerState.stay) {
+        levelManager.startMovement(
+            position.x.floor(), position.y.floor(), moveX, moveY);
+      }
     }
     if (controller.state != PlayerState.stay) {
-      final nextX = position.x + moveX * _velocity * world.delta;
-      final nextY = position.y + moveY * _velocity * world.delta;
+      final nextX = position.x + moveX * movementSpeed * world.delta;
+      final nextY = position.y + moveY * movementSpeed * world.delta;
       if (moveY < 0 && position.y.ceil() != nextY.ceil()) {
+        levelManager.removeGhost(position.x.floor(), position.y.ceil());
         position.y = nextY.ceilToDouble();
         controller.state = PlayerState.stay;
       } else if (moveY > 0 && position.y.floor() != nextY.floor()) {
+        levelManager.removeGhost(position.x.floor(), position.y.floor());
         position.y = nextY.floorToDouble();
         controller.state = PlayerState.stay;
       } else if (moveX < 0 && position.x.ceil() != nextX.ceil()) {
+        levelManager.removeGhost(position.x.ceil(), position.y.floor());
         position.x = nextX.ceilToDouble();
         controller.state = PlayerState.stay;
       } else if (moveX > 0 && position.x.floor() != nextX.floor()) {
+        levelManager.removeGhost(position.x.floor(), position.y.floor());
         position.x = nextX.floorToDouble();
         controller.state = PlayerState.stay;
       } else {

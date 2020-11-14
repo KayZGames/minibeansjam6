@@ -1,5 +1,6 @@
 import 'package:dartemis/dartemis.dart';
-import 'package:minibeansjam6/src/components/components.dart';
+
+import '../../components/components.dart';
 
 part 'level_manager.g.dart';
 
@@ -37,6 +38,7 @@ class LevelManager extends _$LevelManager {
       case LevelObject.empty:
       case LevelObject.atlas:
       case LevelObject.end:
+      case LevelObject.ghost:
         return PlayerState.move;
       case LevelObject.nebula:
       case LevelObject.bean:
@@ -61,6 +63,7 @@ class LevelManager extends _$LevelManager {
     switch (field.object) {
       case LevelObject.empty:
       case LevelObject.atlas:
+      case LevelObject.ghost:
         return false;
       case LevelObject.nebula:
       case LevelObject.border:
@@ -77,6 +80,49 @@ class LevelManager extends _$LevelManager {
     final field = _level.currentGrid[x + moveX][y + moveY];
     world.deleteEntity(field.entity);
   }
+
+  bool canFall(int x, int y, {bool isFalling}) {
+    final field = _level.currentGrid[x][y + 1];
+    switch (field.object) {
+      case LevelObject.empty:
+        return true;
+      case LevelObject.atlas:
+      case LevelObject.ghost:
+        if (isFalling) {
+          return true;
+        }
+        return false;
+      case LevelObject.nebula:
+      case LevelObject.border:
+      case LevelObject.end:
+      case LevelObject.world:
+      case LevelObject.star:
+      case LevelObject.bean:
+        return false;
+    }
+    throw Exception('field@${field.x}:${field.y} is null');
+  }
+
+  void startMovement(int x, int y, int moveX, int moveY,
+      {bool ghostAtOriginalLocation = false}) {
+    final currentField = _level.currentGrid[x][y];
+    final nextField = _level.currentGrid[x + moveX][y + moveY]
+      ..object = currentField.object
+      ..entity = currentField.entity;
+
+    _entities[currentField.entity] = nextField;
+
+    currentField
+      ..object = ghostAtOriginalLocation ? LevelObject.ghost : LevelObject.empty
+      ..entity = null;
+  }
+
+  void removeGhost(int x, int y) {
+    final field = _level.currentGrid[x][y];
+    if (field.object == LevelObject.ghost) {
+      field.object = LevelObject.empty;
+    }
+  }
 }
 
 class Level {
@@ -91,4 +137,4 @@ class LevelField {
   LevelField(this.x, this.y, {this.object = LevelObject.empty, this.entity});
 }
 
-enum LevelObject { empty, nebula, border, star, world, atlas, end, bean }
+enum LevelObject { empty, nebula, border, star, world, atlas, end, bean, ghost }

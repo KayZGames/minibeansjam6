@@ -1,0 +1,1 @@
+const double movementSpeed = 10;

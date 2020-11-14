@@ -22,6 +22,20 @@ class Controller extends Component {
   }
 }
 
-class Nebula extends Component {}
+class CanFall extends Component {
+  bool falling = false;
+}
+
+class CanRoll extends Component {
+  bool rolling = false;
+}
+
+class CanBePushed extends Component {
+  bool pushed = false;
+}
+
+class CanBeConsumed extends Component {
+  bool consumed = false;
+}
 
 enum PlayerState { stay, move, push, eat }
