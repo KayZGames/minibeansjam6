@@ -19,3 +19,17 @@ abstract class _$CanFallPhysicsSystem extends EntityProcessingSystem {
     levelManager = world.getManager<LevelManager>();
   }
 }
+
+abstract class _$CanRollPhysicsSystem extends EntityProcessingSystem {
+  Mapper<Position> positionMapper;
+  Mapper<CanRoll> canRollMapper;
+  LevelManager levelManager;
+  _$CanRollPhysicsSystem() : super(Aspect.empty()..allOf([Position, CanRoll]));
+  @override
+  void initialize() {
+    super.initialize();
+    positionMapper = Mapper<Position>(world);
+    canRollMapper = Mapper<CanRoll>(world);
+    levelManager = world.getManager<LevelManager>();
+  }
+}

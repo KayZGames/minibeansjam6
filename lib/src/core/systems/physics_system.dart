@@ -47,3 +47,53 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
     }
   }
 }
+
+@Generate(
+  EntityProcessingSystem,
+  allOf: [
+    Position,
+    CanRoll,
+  ],
+  manager: [
+    LevelManager,
+  ],
+)
+class CanRollPhysicsSystem extends _$CanRollPhysicsSystem {
+  @override
+  void processEntity(int entity) {
+    final canRoll = canRollMapper[entity];
+    final position = positionMapper[entity];
+    if (canRoll.rollingLeft) {
+      final nextX = position.x - movementSpeed * world.delta;
+      if (nextX.ceil() == position.x.ceil()) {
+        position.x = nextX;
+      } else {
+        position.x = nextX.ceilToDouble();
+        canRoll.rollingLeft = false;
+      }
+    } else if (canRoll.rollingRight) {
+      final nextX = position.x + movementSpeed * world.delta;
+      if (nextX.floor() == position.x.floor()) {
+        position.x = nextX;
+      } else {
+        position.x = nextX.floorToDouble();
+        canRoll.rollingRight = false;
+      }
+    } else {
+      canRoll.rollingLeft = _startRolling(position, -1);
+      if (!canRoll.rollingLeft) {
+        canRoll.rollingRight = _startRolling(position, 1);
+      }
+    }
+  }
+
+  bool _startRolling(Position position, int moveX) {
+    if (levelManager.canRoll(position.x.floor(), position.y.floor(), moveX)) {
+      levelManager.startMovement(
+          position.x.floor(), position.y.floor(), moveX, 0);
+      position.x += moveX * movementSpeed * world.delta;
+      return true;
+    }
+    return false;
+  }
+}

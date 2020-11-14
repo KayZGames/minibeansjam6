@@ -123,6 +123,16 @@ class LevelManager extends _$LevelManager {
       field.object = LevelObject.empty;
     }
   }
+
+  bool canRoll(int x, int y, int rollX) {
+    final field = _level.currentGrid[x + rollX][y];
+    final fieldBelow = _level.currentGrid[x + rollX][y + 1];
+    if (field.object == LevelObject.empty &&
+        fieldBelow.object == LevelObject.empty) {
+      return true;
+    }
+    return false;
+  }
 }
 
 class Level {

@@ -27,7 +27,8 @@ class CanFall extends Component {
 }
 
 class CanRoll extends Component {
-  bool rolling = false;
+  bool rollingLeft = false;
+  bool rollingRight = false;
 }
 
 class CanBePushed extends Component {
