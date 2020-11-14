@@ -10,6 +10,7 @@ part 'level_manager.g.dart';
     CanBeRolledOn,
     CanRoll,
     CanFall,
+    CanBePushed,
     Bean,
   ],
 )
@@ -178,6 +179,17 @@ class LevelManager extends _$LevelManager {
     _levelNumber++;
     _level = null;
     world.deleteAllEntities();
+  }
+
+  void push(int x, int y, int moveX) {
+    final entity = _level.currentGrid[x][y].entity;
+    assert(entity != null, 'null entity at $x:$y');
+    if (canBePushedMapper.has(entity)) {
+      canBePushedMapper[entity]
+        ..pushed = true
+        ..x = moveX;
+      startMovement(x, y, moveX, 0);
+    }
   }
 }
 

@@ -28,6 +28,7 @@ class Game extends GameBase {
         GameBase.rendering: [
           ControllerSystem(),
           ControllerToActionSystem(),
+          PushSystem(),
           CanFallPhysicsSystem(),
           CanRollPhysicsSystem(),
           CanvasCleaningSystem(canvas, fillStyle: 'green'),

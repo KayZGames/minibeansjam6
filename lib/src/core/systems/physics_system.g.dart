@@ -42,3 +42,15 @@ abstract class _$CanRollPhysicsSystem extends PhysicsSystem {
     levelManager = world.getManager<LevelManager>();
   }
 }
+
+abstract class _$PushSystem extends EntityProcessingSystem {
+  Mapper<Position> positionMapper;
+  Mapper<CanBePushed> canBePushedMapper;
+  _$PushSystem() : super(Aspect.empty()..allOf([Position, CanBePushed]));
+  @override
+  void initialize() {
+    super.initialize();
+    positionMapper = Mapper<Position>(world);
+    canBePushedMapper = Mapper<CanBePushed>(world);
+  }
+}

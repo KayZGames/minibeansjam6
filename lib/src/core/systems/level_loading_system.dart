@@ -72,7 +72,7 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
             break;
           default:
             throw Exception(
-                'unkonw tile $levelColumn@$x:$y in ${levelAsset.assetId}');
+                'unknown tile $levelColumn@$x:$y in ${levelAsset.assetId}');
         }
         final components = [
           Position(x.toDouble(), y.toDouble()),

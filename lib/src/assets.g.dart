@@ -21,9 +21,9 @@ const _levels$asset = {
 #        B#  F F F  #
 #        B#   FFF   #
 #        B#    F    #
-#        B#         #
-#        BW    E    #
-#  A     B*         #
+#####    B#         #
+# A WFF  BW    E    #
+#   #WF  B*         #
 #####################''')),
   Levels.level001$txt: TextAsset(
       AssetData(r'minibeansjam6|lib/assets/level/level001.txt', r'''21;15;6;
@@ -36,10 +36,10 @@ const _levels$asset = {
 #         #    F    #
 #        W# F  F  F #
 #        B#  F F F  #
-#        B#   FFF   #
-#        B#    F    #
-#WWWWWWWWB#         #
-#        BW    E    #
-#  A     B*         #
+#       #B#   FFF   #
+#       #B#    F    #
+#       #B#         #
+#       #BW    E    #
+#  A    #B*         #
 #####################'''))
 };

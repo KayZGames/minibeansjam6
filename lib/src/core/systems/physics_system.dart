@@ -137,3 +137,36 @@ class CanRollPhysicsSystem extends _$CanRollPhysicsSystem {
     return false;
   }
 }
+
+@Generate(
+  EntityProcessingSystem,
+  allOf: [
+    Position,
+    CanBePushed,
+  ],
+)
+class PushSystem extends _$PushSystem {
+  @override
+  void processEntity(int entity) {
+    final canBePushed = canBePushedMapper[entity];
+    if (canBePushed.pushed) {
+      final position = positionMapper[entity];
+      final nextX = position.x + canBePushed.x * movementSpeed * world.delta;
+      if (canBePushed.x > 0) {
+        if (nextX.floor() == position.x.floor()) {
+          position.x = nextX;
+        } else {
+          position.x = nextX.floorToDouble();
+          canBePushed.pushed = false;
+        }
+      } else if (canBePushed.x < 0) {
+        if (nextX.ceil() == position.x.ceil()) {
+          position.x = nextX;
+        } else {
+          position.x = nextX.ceilToDouble();
+          canBePushed.pushed = false;
+        }
+      }
+    }
+  }
+}

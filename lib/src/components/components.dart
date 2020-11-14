@@ -36,6 +36,7 @@ class CanBeRolledOn extends Component {}
 
 class CanBePushed extends Component {
   bool pushed = false;
+  int x = 0;
 }
 
 class CanBeConsumed extends Component {
