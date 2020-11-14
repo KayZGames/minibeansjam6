@@ -4,7 +4,14 @@ import '../../components/components.dart';
 
 part 'level_manager.g.dart';
 
-@Generate(Manager)
+@Generate(
+  Manager,
+  mapper: [
+    CanBeRolledOn,
+    CanRoll,
+    CanFall,
+  ],
+)
 class LevelManager extends _$LevelManager {
   Level _level;
   final Map<int, LevelField> _entities = {};
@@ -81,7 +88,15 @@ class LevelManager extends _$LevelManager {
     world.deleteEntity(field.entity);
   }
 
-  bool canFall(int x, int y, {bool isFalling}) {
+  bool canFall(int entity, int x, int y, {bool isFalling}) {
+    if (!isFalling) {
+      if (entity != null) {
+        final canRoll = canRollMapper.getSafe(entity);
+        if (canRoll != null && canRoll.rolling) {
+          return false;
+        }
+      }
+    }
     final field = _level.currentGrid[x][y + 1];
     switch (field.object) {
       case LevelObject.empty:
@@ -103,10 +118,33 @@ class LevelManager extends _$LevelManager {
     throw Exception('field@${field.x}:${field.y} is null');
   }
 
-  void startMovement(int x, int y, int moveX, int moveY,
+  bool canRoll(int entity, int x, int y, int rollX) {
+    if (entity != null) {
+      final canFall = canFallMapper.getSafe(entity);
+      if (canFall != null && canFall.falling) {
+        return false;
+      }
+    }
+    final fieldBelow = _level.currentGrid[x][y + 1];
+    if (fieldBelow.entity != null &&
+        canBeRolledOnMapper.has(fieldBelow.entity)) {
+      final fieldOnSide = _level.currentGrid[x + rollX][y];
+      final fieldBelowSide = _level.currentGrid[x + rollX][y + 1];
+      if (fieldOnSide.object == LevelObject.empty &&
+          fieldBelowSide.object == LevelObject.empty) {
+        print(fieldBelow.object);
+        return true;
+      }
+    }
+    return false;
+  }
+
+  int startMovement(int x, int y, int moveX, int moveY,
       {bool ghostAtOriginalLocation = false}) {
     final currentField = _level.currentGrid[x][y];
-    final nextField = _level.currentGrid[x + moveX][y + moveY]
+    final nextField = _level.currentGrid[x + moveX][y + moveY];
+    final oldEntity = nextField.entity;
+    nextField
       ..object = currentField.object
       ..entity = currentField.entity;
 
@@ -115,6 +153,8 @@ class LevelManager extends _$LevelManager {
     currentField
       ..object = ghostAtOriginalLocation ? LevelObject.ghost : LevelObject.empty
       ..entity = null;
+
+    return oldEntity;
   }
 
   void removeGhost(int x, int y) {
@@ -122,16 +162,6 @@ class LevelManager extends _$LevelManager {
     if (field.object == LevelObject.ghost) {
       field.object = LevelObject.empty;
     }
-  }
-
-  bool canRoll(int x, int y, int rollX) {
-    final field = _level.currentGrid[x + rollX][y];
-    final fieldBelow = _level.currentGrid[x + rollX][y + 1];
-    if (field.object == LevelObject.empty &&
-        fieldBelow.object == LevelObject.empty) {
-      return true;
-    }
-    return false;
   }
 }
 

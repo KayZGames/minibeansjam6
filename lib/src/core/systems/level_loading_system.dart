@@ -81,20 +81,37 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
             components.addAll([
               Controller(),
               Camera(),
+              CanBeKilledByFallingObject(),
             ]);
             break;
           case LevelObject.bean:
-            components.addAll([CanFall(), CanRoll(), CanBeConsumed()]);
+            components.addAll([
+              CanFall(),
+              CanRoll(),
+              CanBeConsumed(),
+              CanBeRolledOn(),
+            ]);
             break;
           case LevelObject.world:
-            components.addAll([CanFall(), CanRoll(), CanBePushed()]);
+            components.addAll([
+              CanFall(),
+              CanRoll(),
+              CanBePushed(),
+              CanBeRolledOn(),
+            ]);
             break;
           case LevelObject.nebula:
-            components.addAll([CanBeConsumed()]);
+            components.addAll([
+              CanBeConsumed(),
+            ]);
+            break;
+          case LevelObject.star:
+            components.addAll([
+              CanBeRolledOn(),
+            ]);
             break;
           case LevelObject.empty:
           case LevelObject.border:
-          case LevelObject.star:
           case LevelObject.end:
           case LevelObject.ghost:
             break;

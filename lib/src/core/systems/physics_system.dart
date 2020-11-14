@@ -8,10 +8,41 @@ import '../managers/level_manager.dart';
 part 'physics_system.g.dart';
 
 @Generate(
-  EntityProcessingSystem,
+  EntitySystem,
   allOf: [
     Position,
+  ],
+)
+abstract class PhysicsSystem extends _$PhysicsSystem {
+  PhysicsSystem(Aspect aspect) : super(aspect);
+  @override
+  void processEntities(Iterable<int> entities) {
+    entities.toList()
+      ..sort((entity1, entity2) {
+        final position1 = positionMapper[entity1];
+        final position2 = positionMapper[entity2];
+        final result = position2.y.compareTo(position1.y);
+        if (result == 0) {
+          return position1.x.compareTo(position2.x);
+        }
+        return result;
+      })
+      ..forEach(processEntity);
+  }
+
+  void processEntity(int entity);
+
+  @override
+  bool checkProcessing() => true;
+}
+
+@Generate(
+  PhysicsSystem,
+  allOf: [
     CanFall,
+  ],
+  mapper: [
+    CanBeKilledByFallingObject,
   ],
   manager: [
     LevelManager,
@@ -27,31 +58,39 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
       if (nextY.floor() == position.y.floor()) {
         position.y = nextY;
       } else {
-        if (levelManager.canFall(position.x.floor(), nextY.floor(),
+        if (levelManager.canFall(entity, position.x.floor(), nextY.floor(),
             isFalling: true)) {
-          levelManager.startMovement(position.x.floor(), nextY.floor(), 0, 1);
+          final previousEntity = levelManager.startMovement(
+              position.x.floor(), nextY.floor(), 0, 1);
           position.y = nextY;
+          if (previousEntity != null &&
+              canBeKilledByFallingObjectMapper.has(previousEntity)) {
+            world.deleteEntity(previousEntity);
+          }
         } else {
           position.y = nextY.floorToDouble();
           canFall.falling = false;
         }
       }
     } else {
-      if (levelManager.canFall(position.x.floor(), position.y.floor(),
+      if (levelManager.canFall(entity, position.x.floor(), position.y.floor(),
           isFalling: false)) {
-        levelManager.startMovement(
+        final previousEntity = levelManager.startMovement(
             position.x.floor(), position.y.floor(), 0, 1);
         position.y += movementSpeed * world.delta;
         canFall.falling = true;
+        if (previousEntity != null &&
+            canBeKilledByFallingObjectMapper.has(previousEntity)) {
+          world.deleteEntity(previousEntity);
+        }
       }
     }
   }
 }
 
 @Generate(
-  EntityProcessingSystem,
+  PhysicsSystem,
   allOf: [
-    Position,
     CanRoll,
   ],
   manager: [
@@ -80,15 +119,16 @@ class CanRollPhysicsSystem extends _$CanRollPhysicsSystem {
         canRoll.rollingRight = false;
       }
     } else {
-      canRoll.rollingLeft = _startRolling(position, -1);
+      canRoll.rollingLeft = _startRolling(entity, position, -1);
       if (!canRoll.rollingLeft) {
-        canRoll.rollingRight = _startRolling(position, 1);
+        canRoll.rollingRight = _startRolling(entity, position, 1);
       }
     }
   }
 
-  bool _startRolling(Position position, int moveX) {
-    if (levelManager.canRoll(position.x.floor(), position.y.floor(), moveX)) {
+  bool _startRolling(int entity, Position position, int moveX) {
+    if (levelManager.canRoll(
+        entity, position.x.floor(), position.y.floor(), moveX)) {
       levelManager.startMovement(
           position.x.floor(), position.y.floor(), moveX, 0);
       position.x += moveX * movementSpeed * world.delta;

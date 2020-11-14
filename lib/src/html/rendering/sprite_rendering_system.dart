@@ -16,7 +16,7 @@ part 'sprite_rendering_system.g.dart';
   ],
 )
 class SpriteRenderingSystem extends _$SpriteRenderingSystem {
-  Position _cameraPosition;
+  double _cameraX, _cameraY;
   CanvasRenderingContext2D ctx;
   SpriteSheet sheet;
   SpriteRenderingSystem(this.ctx, this.sheet);
@@ -24,7 +24,11 @@ class SpriteRenderingSystem extends _$SpriteRenderingSystem {
   @override
   void begin() {
     final camera = tagManager.getEntity(cameraTag);
-    _cameraPosition = positionMapper[camera];
+    if (camera != null) {
+      final cameraPosition = positionMapper[camera];
+      _cameraX = cameraPosition.x;
+      _cameraY = cameraPosition.y;
+    }
   }
 
   @override
@@ -44,11 +48,11 @@ class SpriteRenderingSystem extends _$SpriteRenderingSystem {
         sprite.src.height,
         sprite.dst.left +
             position.x * 64 -
-            _cameraPosition.x * 64 +
+            _cameraX * 64 +
             cameraManager.clientWidth ~/ 2,
         sprite.dst.top +
             position.y * 64 -
-            _cameraPosition.y * 64 +
+            _cameraY * 64 +
             cameraManager.clientHeight ~/ 2,
         sprite.dst.width,
         sprite.dst.height);

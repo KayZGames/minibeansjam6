@@ -29,7 +29,10 @@ class CanFall extends Component {
 class CanRoll extends Component {
   bool rollingLeft = false;
   bool rollingRight = false;
+  bool get rolling => rollingLeft || rollingRight;
 }
+
+class CanBeRolledOn extends Component {}
 
 class CanBePushed extends Component {
   bool pushed = false;
@@ -38,5 +41,7 @@ class CanBePushed extends Component {
 class CanBeConsumed extends Component {
   bool consumed = false;
 }
+
+class CanBeKilledByFallingObject extends Component {}
 
 enum PlayerState { stay, move, push, eat }
