@@ -1,19 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'position_rendering_system.dart';
+part of 'controller_to_action_system.dart';
 
 // **************************************************************************
 // SystemGenerator
 // **************************************************************************
 
-abstract class _$PositionRenderingSystem extends EntityProcessingSystem {
+abstract class _$ControllerToActionSystem extends EntityProcessingSystem {
+  Mapper<Controller> controllerMapper;
   Mapper<Position> positionMapper;
-  CameraManager cameraManager;
-  _$PositionRenderingSystem() : super(Aspect.empty()..allOf([Position]));
+  _$ControllerToActionSystem()
+      : super(Aspect.empty()..allOf([Controller, Position]));
   @override
   void initialize() {
     super.initialize();
+    controllerMapper = Mapper<Controller>(world);
     positionMapper = Mapper<Position>(world);
-    cameraManager = world.getManager<CameraManager>();
   }
 }

@@ -17,26 +17,24 @@ class ControllerSystem extends _$ControllerSystem {
   @override
   void processEntity(int entity) {
     final c = controllerMapper[entity]..reset();
-    if (up) {
-      if (left) {
-        c.upleft = true;
+    if (!c.isMoving) {
+      if (up) {
+        c
+          ..up = true
+          ..isMoving = true;
+      } else if (down) {
+        c
+          ..down = true
+          ..isMoving = true;
+      } else if (left) {
+        c
+          ..left = true
+          ..isMoving = true;
       } else if (right) {
-        c.upright = true;
-      } else {
-        c.up = true;
+        c
+          ..right = true
+          ..isMoving = true;
       }
-    } else if (down) {
-      if (left) {
-        c.downleft = true;
-      } else if (right) {
-        c.downright = true;
-      } else {
-        c.down = true;
-      }
-    } else if (left) {
-      c.left = true;
-    } else if (right) {
-      c.right = true;
     }
   }
 }

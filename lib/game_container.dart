@@ -1,8 +1,8 @@
 import 'package:angular/angular.dart';
 
-import 'angular/game_menu.dart';
-import 'angular/game_service.dart';
-import 'core/managers/game_state_manager.dart';
+import 'src/angular/game_menu.dart';
+import 'src/angular/game_service.dart';
+import 'src/core/managers/game_state_manager.dart';
 
 @Component(
   selector: 'game-container',
