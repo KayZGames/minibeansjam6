@@ -18,14 +18,14 @@ class ControllerSystem extends _$ControllerSystem {
   void processEntity(int entity) {
     final controller = controllerMapper[entity]..reset();
     if (controller.state == PlayerState.stay) {
-      if (up) {
-        controller.up = true;
-      } else if (down) {
-        controller.down = true;
-      } else if (left) {
+      if (left) {
         controller.left = true;
       } else if (right) {
         controller.right = true;
+      } else if (up) {
+        controller.up = true;
+      } else if (down) {
+        controller.down = true;
       }
     }
   }

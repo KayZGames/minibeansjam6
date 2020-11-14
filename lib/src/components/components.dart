@@ -42,6 +42,8 @@ class CanBeConsumed extends Component {
   bool consumed = false;
 }
 
+class Bean extends Component {}
+
 class CanBeKilledByFallingObject extends Component {}
 
-enum PlayerState { stay, move, push, eat }
+enum PlayerState { stay, move, push, eat, finishLevel }

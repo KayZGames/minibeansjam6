@@ -19,14 +19,16 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
   LevelLoadingSystem(this.spriteSheet);
   @override
   void processSystem() {
-    final levelAsset = levels[Levels.level000$txt];
+    final levelAsset = levels[Levels.values[levelManager.levelNumber]];
     final levelDefinition = levelAsset.text;
     final levelData = levelDefinition.split(';');
-    // final beansRequired = int.parse(levelData[0]);
+    final beansRequired = int.parse(levelData[2]);
     final width = int.parse(levelData[0]);
     final height = int.parse(levelData[1]);
-    final level = Level(List.generate(
-        width, (x) => List.generate(height, (y) => LevelField(x, y))));
+    final level = Level(
+        beansRequired,
+        List.generate(
+            width, (x) => List.generate(height, (y) => LevelField(x, y))));
     final levelLayout = levelData[3];
     final levelRows = levelLayout.split('\n').skip(1);
     var y = 0;
@@ -90,6 +92,7 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
               CanRoll(),
               CanBeConsumed(),
               CanBeRolledOn(),
+              Bean(),
             ]);
             break;
           case LevelObject.world:

@@ -43,7 +43,8 @@ class ControllerToActionSystem extends _$ControllerToActionSystem {
       }
       if (controller.state != PlayerState.stay) {
         levelManager.startMovement(
-            position.x.floor(), position.y.floor(), moveX, moveY);
+            position.x.floor(), position.y.floor(), moveX, moveY,
+            ghostAtOriginalLocation: true);
       }
     }
     if (controller.state != PlayerState.stay) {

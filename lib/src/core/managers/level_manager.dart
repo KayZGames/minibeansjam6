@@ -10,13 +10,16 @@ part 'level_manager.g.dart';
     CanBeRolledOn,
     CanRoll,
     CanFall,
+    Bean,
   ],
 )
 class LevelManager extends _$LevelManager {
+  int _levelNumber = 0;
   Level _level;
   final Map<int, LevelField> _entities = {};
 
   bool get levelLoaded => _level != null;
+  int get levelNumber => _levelNumber;
 
   // ignore: avoid_setters_without_getters
   set level(Level level) {
@@ -42,9 +45,13 @@ class LevelManager extends _$LevelManager {
   PlayerState playerStateForMove(int x, int y, int moveX, int moveY) {
     final field = _level.currentGrid[x + moveX][y + moveY];
     switch (field.object) {
+      case LevelObject.end:
+        if (_level.beansRequired <= _level.beansCollected) {
+          return PlayerState.finishLevel;
+        }
+        return PlayerState.stay;
       case LevelObject.empty:
       case LevelObject.atlas:
-      case LevelObject.end:
       case LevelObject.ghost:
         return PlayerState.move;
       case LevelObject.nebula:
@@ -85,6 +92,9 @@ class LevelManager extends _$LevelManager {
 
   void eat(int x, int y, int moveX, int moveY) {
     final field = _level.currentGrid[x + moveX][y + moveY];
+    if (field.entity != null && beanMapper.has(field.entity)) {
+      _level.beansCollected++;
+    }
     world.deleteEntity(field.entity);
   }
 
@@ -163,11 +173,19 @@ class LevelManager extends _$LevelManager {
       field.object = LevelObject.empty;
     }
   }
+
+  void nextLevel() {
+    _levelNumber++;
+    _level = null;
+    world.deleteAllEntities();
+  }
 }
 
 class Level {
+  final int beansRequired;
   final List<List<LevelField>> currentGrid;
-  Level(this.currentGrid);
+  int beansCollected = 0;
+  Level(this.beansRequired, this.currentGrid);
 }
 
 class LevelField {

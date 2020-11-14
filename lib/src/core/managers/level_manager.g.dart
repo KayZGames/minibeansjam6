@@ -10,11 +10,13 @@ abstract class _$LevelManager extends Manager {
   Mapper<CanBeRolledOn> canBeRolledOnMapper;
   Mapper<CanRoll> canRollMapper;
   Mapper<CanFall> canFallMapper;
+  Mapper<Bean> beanMapper;
   @override
   void initialize() {
     super.initialize();
     canBeRolledOnMapper = Mapper<CanBeRolledOn>(world);
     canRollMapper = Mapper<CanRoll>(world);
     canFallMapper = Mapper<CanFall>(world);
+    beanMapper = Mapper<Bean>(world);
   }
 }
