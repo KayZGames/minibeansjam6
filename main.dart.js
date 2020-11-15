@@ -7751,9 +7751,9 @@ aT:function(){var s,r,q,p,o=this,n=o.k3.ch,m=n.d,l=Math.max(0,n.a-n.c)
 n=o.ac
 n.font="30px Verdana"
 s=""+m+" bean"
-r=s+(m>1?"s":"")+" in level"
+r=s+(m!==1?"s":"")+" in level"
 s=H.j(l)+" bean"
-q=s+(l>1?"s":"")+" needed for next level"
+q=s+(l!==1?"s":"")+" needed for next level"
 p=n.measureText(q).width
 n.fillStyle="grey"
 n.fillRect(0,0,o.k4.b,50)
