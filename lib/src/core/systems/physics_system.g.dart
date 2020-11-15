@@ -19,6 +19,7 @@ abstract class _$PhysicsSystem extends EntitySystem {
 abstract class _$CanFallPhysicsSystem extends PhysicsSystem {
   Mapper<CanFall> canFallMapper;
   Mapper<CanBeKilledByFallingObject> canBeKilledByFallingObjectMapper;
+  Mapper<Controller> controllerMapper;
   LevelManager levelManager;
   _$CanFallPhysicsSystem() : super(Aspect.empty()..allOf([CanFall]));
   @override
@@ -27,6 +28,7 @@ abstract class _$CanFallPhysicsSystem extends PhysicsSystem {
     canFallMapper = Mapper<CanFall>(world);
     canBeKilledByFallingObjectMapper =
         Mapper<CanBeKilledByFallingObject>(world);
+    controllerMapper = Mapper<Controller>(world);
     levelManager = world.getManager<LevelManager>();
   }
 }

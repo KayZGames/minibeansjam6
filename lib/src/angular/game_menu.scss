@@ -22,9 +22,12 @@
 
     > section {
 
-      li > label {
+      li {
         display: inline-block;
-        width: 80px;
+        > label {
+          display: inline-block;
+          width: 100px;
+        }
       }
 
       > button {

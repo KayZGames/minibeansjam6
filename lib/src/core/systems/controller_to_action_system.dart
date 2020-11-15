@@ -21,6 +21,9 @@ class ControllerToActionSystem extends _$ControllerToActionSystem {
   @override
   void processEntity(int entity) {
     final controller = controllerMapper[entity];
+    if (controller.restart) {
+      return;
+    }
     final position = positionMapper[entity];
     var moveX = 0;
     var moveY = 0;

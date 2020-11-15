@@ -19,6 +19,7 @@ class ControllerSystem extends _$ControllerSystem {
     final controller = controllerMapper[entity]..reset();
     if (controller.state == PlayerState.stay) {
       controller
+        ..restart = restart
         ..space = space
         ..left = left
         ..right = right
@@ -28,4 +29,5 @@ class ControllerSystem extends _$ControllerSystem {
   }
 
   bool get space => isPressed(KeyCode.SPACE);
+  bool get restart => isPressed(KeyCode.R);
 }

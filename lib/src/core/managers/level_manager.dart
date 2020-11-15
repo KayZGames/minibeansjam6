@@ -191,6 +191,11 @@ class LevelManager extends _$LevelManager {
       startMovement(x, y, moveX, 0);
     }
   }
+
+  void restartLevel() {
+    _level = null;
+    world.deleteAllEntities();
+  }
 }
 
 class Level {

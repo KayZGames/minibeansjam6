@@ -20,6 +20,8 @@ class NextLevelSystem extends _$NextLevelSystem {
     final controller = controllerMapper[entity];
     if (controller.state == PlayerState.finishLevel) {
       levelManager.nextLevel();
+    } else if (controller.restart) {
+      levelManager.restartLevel();
     }
   }
 }

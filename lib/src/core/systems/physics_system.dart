@@ -43,6 +43,7 @@ abstract class PhysicsSystem extends _$PhysicsSystem {
   ],
   mapper: [
     CanBeKilledByFallingObject,
+    Controller,
   ],
   manager: [
     LevelManager,
@@ -65,6 +66,9 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
           position.y = nextY;
           if (previousEntity != null &&
               canBeKilledByFallingObjectMapper.has(previousEntity)) {
+            if (controllerMapper.has(previousEntity)) {
+              world.createEntity([Controller()]);
+            }
             world.deleteEntity(previousEntity);
           }
         } else {
@@ -81,6 +85,9 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
         canFall.falling = true;
         if (previousEntity != null &&
             canBeKilledByFallingObjectMapper.has(previousEntity)) {
+          if (controllerMapper.has(previousEntity)) {
+            world.createEntity([Controller()]);
+          }
           world.deleteEntity(previousEntity);
         }
       }
