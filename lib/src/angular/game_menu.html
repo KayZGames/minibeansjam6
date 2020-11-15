@@ -6,10 +6,11 @@
       <li><label>Move</label>: WASD/🡅🡄🡇🡆</li>
       <li><label>Consume</label>: Space + WASD/🡅🡄🡇🡆</li>
       <li><label>Restart Level</label>: R</li>
+      <li><label>Start Game</label>: Enter</li>
     </ul>
   </section>
   <section>
-    <button (click)='startGame()' *ngIf='gameCanStart'>Start Game</button>
+    <button (click)='startGame()' (keyup.enter)='startGame()' *ngIf='gameCanStart' autofocus>Start Game</button>
   </section>
 </main>
 <div *ngIf='error'>{{errorMessage}}</div>
