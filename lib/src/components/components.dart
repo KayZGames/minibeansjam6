@@ -1,7 +1,7 @@
 import 'package:dartemis/dartemis.dart';
 
 class Controller extends Component {
-  bool up, down, left, right;
+  bool up, down, left, right, space;
   PlayerState state;
 
   Controller({
@@ -9,6 +9,7 @@ class Controller extends Component {
     this.down = false,
     this.left = false,
     this.right = false,
+    this.space = false,
     this.state = PlayerState.stay,
   });
 
@@ -18,6 +19,7 @@ class Controller extends Component {
       down = false;
       left = false;
       right = false;
+      space = false;
     }
   }
 }

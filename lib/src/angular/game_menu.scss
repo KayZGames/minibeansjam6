@@ -21,6 +21,12 @@
     height: 80%;
 
     > section {
+
+      li > label {
+        display: inline-block;
+        width: 80px;
+      }
+
       > button {
         // https://css-tricks.com/overriding-default-button-styles/
         font-family: inherit;

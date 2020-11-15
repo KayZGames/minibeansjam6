@@ -18,15 +18,14 @@ class ControllerSystem extends _$ControllerSystem {
   void processEntity(int entity) {
     final controller = controllerMapper[entity]..reset();
     if (controller.state == PlayerState.stay) {
-      if (left) {
-        controller.left = true;
-      } else if (right) {
-        controller.right = true;
-      } else if (up) {
-        controller.up = true;
-      } else if (down) {
-        controller.down = true;
-      }
+      controller
+        ..space = space
+        ..left = left
+        ..right = right
+        ..up = up
+        ..down = down;
     }
   }
+
+  bool get space => isPressed(KeyCode.SPACE);
 }

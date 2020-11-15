@@ -41,7 +41,9 @@ class ControllerToActionSystem extends _$ControllerToActionSystem {
       if (controller.state == PlayerState.eat) {
         levelManager.eat(position.x.floor(), position.y.floor(), moveX, moveY);
       }
-      if (controller.state != PlayerState.stay) {
+      if (controller.space) {
+        controller.state = PlayerState.stay;
+      } else if (controller.state != PlayerState.stay) {
         if (controller.state == PlayerState.push) {
           levelManager.push(
               position.x.floor() + moveX, position.y.floor(), moveX);
