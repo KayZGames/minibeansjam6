@@ -1,4 +1,4 @@
-# %game_name% for miniBeansjam 6
+# Beans for Atlas for miniBeansjam 6
 
 ## Theme: Du bewegst die Welt
 
