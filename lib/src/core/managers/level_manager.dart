@@ -1,6 +1,8 @@
 import 'package:dartemis/dartemis.dart';
+import 'package:gamedev_helpers/gamedev_helpers.dart';
 
 import '../../components/components.dart';
+import '../config.dart';
 
 part 'level_manager.g.dart';
 
@@ -12,6 +14,10 @@ part 'level_manager.g.dart';
     CanFall,
     CanBePushed,
     Bean,
+    Renderable,
+  ],
+  manager: [
+    TagManager,
   ],
 )
 class LevelManager extends _$LevelManager {
@@ -21,6 +27,9 @@ class LevelManager extends _$LevelManager {
 
   bool get levelLoaded => _level != null;
   int get levelNumber => _levelNumber;
+
+  int get levelWidth => _level?.currentGrid?.length ?? 0;
+  int get levelHeight => _level?.currentGrid[0].length ?? 0;
 
   // ignore: avoid_setters_without_getters
   set level(Level level) {
@@ -95,6 +104,10 @@ class LevelManager extends _$LevelManager {
     final field = _level.currentGrid[x + moveX][y + moveY];
     if (field.entity != null && beanMapper.has(field.entity)) {
       _level.beansCollected++;
+      if (_level.beansCollected == _level.beansRequired) {
+        final end = tagManager.getEntity(endTag);
+        renderableMapper[end].name = 'end_open';
+      }
     }
     world.deleteEntity(field.entity);
   }

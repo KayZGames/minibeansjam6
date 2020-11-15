@@ -12,6 +12,8 @@ abstract class _$LevelManager extends Manager {
   Mapper<CanFall> canFallMapper;
   Mapper<CanBePushed> canBePushedMapper;
   Mapper<Bean> beanMapper;
+  Mapper<Renderable> renderableMapper;
+  TagManager tagManager;
   @override
   void initialize() {
     super.initialize();
@@ -20,5 +22,7 @@ abstract class _$LevelManager extends Manager {
     canFallMapper = Mapper<CanFall>(world);
     canBePushedMapper = Mapper<CanBePushed>(world);
     beanMapper = Mapper<Bean>(world);
+    renderableMapper = Mapper<Renderable>(world);
+    tagManager = world.getManager<TagManager>();
   }
 }

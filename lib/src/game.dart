@@ -35,6 +35,8 @@ class Game extends GameBase {
           CanFallPhysicsSystem(),
           CanRollPhysicsSystem(),
           CanvasCleaningSystem(canvas, fillStyle: 'green'),
+          BorderRenderingSystem(ctx, spriteSheet),
+          NebulaRenderingSystem(ctx, spriteSheet),
           SpriteRenderingSystem(ctx, spriteSheet),
           GameTimeSystem(),
           FpsRenderingSystem(ctx, 'white'),

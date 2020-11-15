@@ -3,6 +3,7 @@ import 'package:gamedev_helpers/gamedev_helpers.dart';
 
 import '../../assets.dart';
 import '../../components/components.dart';
+import '../config.dart';
 import '../managers/level_manager.dart';
 
 part 'level_loading_system.g.dart';
@@ -107,6 +108,7 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
           case LevelObject.nebula:
             components.addAll([
               CanBeConsumed(),
+              Nebula(),
             ]);
             break;
           case LevelObject.star:
@@ -114,16 +116,23 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
               CanBeRolledOn(),
             ]);
             break;
-          case LevelObject.empty:
           case LevelObject.border:
+            components.addAll([
+              Border(),
+            ]);
+            break;
+          case LevelObject.empty:
           case LevelObject.end:
           case LevelObject.ghost:
             break;
         }
         final entity = world.createEntity(components);
         field.entity = entity;
-        if (type == 'atlas') {
+        if (field.object == LevelObject.atlas) {
           tagManager.register(entity, cameraTag);
+        }
+        if (field.object == LevelObject.end) {
+          tagManager.register(entity, endTag);
         }
         x++;
       }

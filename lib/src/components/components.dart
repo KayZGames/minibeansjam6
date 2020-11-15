@@ -48,6 +48,8 @@ class CanBeConsumed extends Component {
 }
 
 class Bean extends Component {}
+class Border extends Component {}
+class Nebula extends Component {}
 
 class CanBeKilledByFallingObject extends Component {}
 
