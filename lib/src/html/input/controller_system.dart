@@ -1,7 +1,9 @@
 import 'dart:html';
 
 import 'package:gamedev_helpers/gamedev_helpers.dart';
+
 import '../../components/components.dart';
+import '../../core/managers/game_state_manager.dart';
 
 part 'controller_system.g.dart';
 
@@ -9,6 +11,9 @@ part 'controller_system.g.dart';
   GenericInputHandlingSystem,
   allOf: [
     Controller,
+  ],
+  manager: [
+    GameStateManager,
   ],
 )
 class ControllerSystem extends _$ControllerSystem {
@@ -30,4 +35,7 @@ class ControllerSystem extends _$ControllerSystem {
 
   bool get space => isPressed(KeyCode.SPACE);
   bool get restart => isPressed(KeyCode.R);
+
+  @override
+  bool checkProcessing() => gameStateManager.state == GameState.playing;
 }

@@ -1,21 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'next_level_system.dart';
+part of 'finish_game_system.dart';
 
 // **************************************************************************
 // SystemGenerator
 // **************************************************************************
 
-abstract class _$NextLevelSystem extends EntityProcessingSystem {
-  Mapper<Controller> controllerMapper;
-  LevelManager levelManager;
+abstract class _$FinishGameSystem extends VoidEntitySystem {
+  GameTimeSystem gameTimeSystem;
   GameStateManager gameStateManager;
-  _$NextLevelSystem() : super(Aspect.empty()..allOf([Controller]));
+  CameraManager cameraManager;
   @override
   void initialize() {
     super.initialize();
-    controllerMapper = Mapper<Controller>(world);
-    levelManager = world.getManager<LevelManager>();
+    gameTimeSystem = world.getSystem<GameTimeSystem>();
     gameStateManager = world.getManager<GameStateManager>();
+    cameraManager = world.getManager<CameraManager>();
   }
 }

@@ -1,6 +1,8 @@
 import 'package:dartemis/dartemis.dart';
 
+import '../../assets.dart';
 import '../../components/components.dart';
+import '../managers/game_state_manager.dart';
 import '../managers/level_manager.dart';
 
 part 'next_level_system.g.dart';
@@ -12,6 +14,7 @@ part 'next_level_system.g.dart';
   ],
   manager: [
     LevelManager,
+    GameStateManager,
   ],
 )
 class NextLevelSystem extends _$NextLevelSystem {
@@ -19,7 +22,11 @@ class NextLevelSystem extends _$NextLevelSystem {
   void processEntity(int entity) {
     final controller = controllerMapper[entity];
     if (controller.state == PlayerState.finishLevel) {
-      levelManager.nextLevel();
+      if (levelManager.levelNumber < Levels.values.length - 1) {
+        levelManager.nextLevel();
+      } else {
+        gameStateManager.state = GameState.finished;
+      }
     } else if (controller.restart) {
       levelManager.restartLevel();
     }

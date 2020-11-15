@@ -10,6 +10,7 @@ abstract class _$ControllerToActionSystem extends EntityProcessingSystem {
   Mapper<Controller> controllerMapper;
   Mapper<Position> positionMapper;
   LevelManager levelManager;
+  GameStateManager gameStateManager;
   _$ControllerToActionSystem()
       : super(Aspect.empty()..allOf([Controller, Position]));
   @override
@@ -18,5 +19,6 @@ abstract class _$ControllerToActionSystem extends EntityProcessingSystem {
     controllerMapper = Mapper<Controller>(world);
     positionMapper = Mapper<Position>(world);
     levelManager = world.getManager<LevelManager>();
+    gameStateManager = world.getManager<GameStateManager>();
   }
 }

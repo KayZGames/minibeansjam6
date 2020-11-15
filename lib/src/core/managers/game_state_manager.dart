@@ -4,4 +4,4 @@ class GameStateManager extends Manager {
   GameState state = GameState.menu;
 }
 
-enum GameState { menu, playing }
+enum GameState { menu, playing, finished }

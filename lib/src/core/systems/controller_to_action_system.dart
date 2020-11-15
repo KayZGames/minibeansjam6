@@ -3,6 +3,7 @@ import 'package:gamedev_helpers/gamedev_helpers_shared.dart';
 
 import '../../components/components.dart';
 import '../config.dart';
+import '../managers/game_state_manager.dart';
 import '../managers/level_manager.dart';
 
 part 'controller_to_action_system.g.dart';
@@ -15,6 +16,7 @@ part 'controller_to_action_system.g.dart';
   ],
   manager: [
     LevelManager,
+    GameStateManager,
   ],
 )
 class ControllerToActionSystem extends _$ControllerToActionSystem {
@@ -82,4 +84,7 @@ class ControllerToActionSystem extends _$ControllerToActionSystem {
       }
     }
   }
+
+  @override
+  bool checkProcessing() => gameStateManager.state == GameState.playing;
 }
