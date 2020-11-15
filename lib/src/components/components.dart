@@ -30,6 +30,7 @@ class Controller extends Component {
 
 class CanFall extends Component {
   bool falling = false;
+  bool hasGhost = false;
   Sfx fallSound;
   CanFall(this.fallSound);
 }

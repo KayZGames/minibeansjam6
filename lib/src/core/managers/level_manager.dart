@@ -34,7 +34,7 @@ class LevelManager extends _$LevelManager {
   int get levelWidth => _level?.currentGrid?.length ?? 0;
   int get levelHeight => _level?.currentGrid[0].length ?? 0;
 
-  // ignore: avoid_setters_without_getters
+  Level get level => _level;
   set level(Level level) {
     _level = level;
     for (var x = 0; x < level.currentGrid.length; x++) {
@@ -69,6 +69,11 @@ class LevelManager extends _$LevelManager {
         return PlayerState.move;
       case LevelObject.nebula:
       case LevelObject.bean:
+        if (canFallMapper.has(field.entity)) {
+          if (canFallMapper[field.entity].falling) {
+            return PlayerState.stay;
+          }
+        }
         return PlayerState.eat;
       case LevelObject.border:
       case LevelObject.star:
@@ -107,7 +112,7 @@ class LevelManager extends _$LevelManager {
     final field = _level.currentGrid[x + moveX][y + moveY];
     if (field.entity != null && beanMapper.has(field.entity)) {
       _level.beansCollected++;
-
+      _level.beansRemaining--;
       if (_level.beansCollected == _level.beansRequired) {
         final end = tagManager.getEntity(endTag);
         renderableMapper[end].name = 'end_open';
@@ -221,6 +226,7 @@ class Level {
   final int beansRequired;
   final List<List<LevelField>> currentGrid;
   int beansCollected = 0;
+  int beansRemaining = 0;
   Level(this.beansRequired, this.currentGrid);
 }
 

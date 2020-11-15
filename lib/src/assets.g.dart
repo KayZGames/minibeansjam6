@@ -6,7 +6,17 @@ part of 'assets.dart';
 // BundleGenerator
 // **************************************************************************
 
-enum Levels { level000$txt, level001$txt }
+enum Levels {
+  level000$txt,
+  level001$txt,
+  level002$txt,
+  level003$txt,
+  level004$txt,
+  level005$txt,
+  level006$txt,
+  level007$txt,
+  level999$txt
+}
 const _levels$asset = {
   Levels.level000$txt: TextAsset(
       AssetData(r'minibeansjam6|lib/assets/level/level000.txt', r'''24;15;6;
@@ -41,7 +51,182 @@ const _levels$asset = {
 #       #B#         #
 #       #BW    E    #
 #  A    #B*         #
-#####################'''))
+#####################''')),
+  Levels.level002$txt: TextAsset(
+      AssetData(r'minibeansjam6|lib/assets/level/level002.txt', r'''63;35;22;
+###############################################################
+#                             A#EB                            #
+# ########################################################### #
+#                    #               #           #B           #
+# ################## ## ############ # ###################### #
+# #            #   #      #          # #     #   #            #
+# # ########## # # # #### # ######## # # ### # # # ############
+# # #          # # # #    # #      #   # # # # # # #          #
+# # #  B B B   # # # #      # #### ##### # # # # # # ######## #
+# # #   B B    # # # ######## ####   #   # #   #   # #      # #
+# # #    B     # #   #        ###### ### # ######### ###### # #
+#   # ########## ##### ###########       #                  # #
+# ### #          #               # ########################## #
+#     ############     BB  BB    # #   #   #   #   #   #    # #
+# #####          #    B  BB  B   # # #   #   #   #   #   ## # #
+#       ######## #     B    B    # # ###################### # #
+# #######     #  #      B  B     # #       #  #         #   # #
+# #     # ### # ##       BB      # ####### #  # ######### ### #
+# # # # #   # #  #               #         #            #   # #
+# # # # ##  # # ####  ####  ##### #     #  #  ######### ### # #
+# # # #  #  # # #   # #   #   #   #     #  #  #         #   # #
+# # #### #  # # #   # #   #   #    #   #   #  # ####### # ### #
+# #         # # ####  ####    #    #   #   #  # #     # #     #
+# ########### # # #   #   #   #     # #    #  # #     # ##### #
+#             # #  #  #   #   #     # #    #  # #     #     # #
+# ############# #   # ####    #      #     #  # #     #     # #
+# #             #             # ###### #####  # #######     # #
+# # ######### ##############  # #             #             # #
+# # #         #               # # #########################   #
+# # # ####### #  ############## # #                         # #
+# # # #BBBBB#    #              # # ####################### # #
+# # # #BBBBB# #  #              # #                         # #
+# # # ####### #  ############## # ########################### #
+# # #         #                 #                             #
+###############################################################''')),
+  Levels.level003$txt: TextAsset(
+      AssetData(r'minibeansjam6|lib/assets/level/level003.txt', r'''25;25;22;
+#########################
+#BWWWWWWWWWWEWWWWWWWWWWB#
+F#BWWWWWWWWWWWWWWWWWWWB#
+FF#BWWWWWWWWWWWWWWWWWB#
+FFF#BWWWWWWWWWWWWWWWB#
+FFFF#BWWWWWWWWWWWWWB#
+FFFFF#BWWWWWWWWWWWB#
+FFFFFF#BWWWWWWWWWB#
+FFFFFFF#BWWWWWWWB#
+FFFFFFFF#BWWWWWB#
+FFFFFFFFF#BWWWB#
+FFFFFFFFFF#BWB#
+############W############
+#FFFFFFFFFFF FFFFFFFFFFF#
+#FFFFFFFFFFF*FFFFFFFFFFF#
+#FFFFFFFFFFFFFFFFFFFFFFF#
+#FFFFFFFFFFFAFFFFFFFFFFF#
+#FFFFFFFFFFFFFFFFFFFFFFF#
+#FFFFFFFFFFFFFFFFFFFFFFF#
+#FFFFFFFFFFFFFFFFFFFFFFF#
+#FFFFFFFFFFFFFFFFFFFFFFF#
+#FFFFFFFFFFFFFFFFFFFFFFF#
+#FFFFFFFFFFFFFFFFFFFFFFF#
+#FFFFFFFFFFFFFFFFFFFFFFF#
+#########################''')),
+  Levels.level004$txt: TextAsset(
+      AssetData(r'minibeansjam6|lib/assets/level/level004.txt', r'''50;20;28;
+##################################################
+#                                                #
+# **********************************************B#
+# *AW                   WWW#      B              #
+# *BW             B     WWW#              B      #
+# *BW    B              WWW#                     #
+# *BW                   WWW##########            #
+# *BW        B          BBBWFFFFFFFFFF           #
+# *BW                   WWW####B#B#B#F           #
+# *BW                   WWW#  #######       B    #
+# *BW     B             WWW#                     #
+# *BWW             B    WWW#   B                 #
+# EBBB                  WWW#            B        #
+##################################################''')),
+  Levels.level005$txt: TextAsset(
+      AssetData(r'minibeansjam6|lib/assets/level/level005.txt', r'''50;20;12;
+##################################################
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW#
+#*************F****F****FF****F****F*************#
+#            FFFFFFFFFFFFFFFFFFFFFFF             #
+# A         FFFFFFFFFFFFFFFFFFFFFFFFFF         E #
+#          FFFFFFFFFFFFFFFFFFFFFFFFFFFF          #
+# B       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF       B #
+#        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF        #
+# B     B     B     B   BB   B     B     B     B #
+##################################################''')),
+  Levels.level006$txt: TextAsset(
+      AssetData(r'minibeansjam6|lib/assets/level/level006.txt', r'''24;16;34;
+########################
+#W#                 #FW#
+#B#     A           #B*#
+#B#                    #
+#B#     B         BW F #
+#       B         BW F #
+###     B         BW F #
+#       B         BW F #
+#       B         BW F #
+#       B         BW F #
+#       B         B*FF*#
+#       BW         FF**#
+#       B*        BF***#
+#######WB*         F####
+#BBBBBBBB*    BBBBFFFFE#
+########################''')),
+  Levels.level007$txt: TextAsset(
+      AssetData(r'minibeansjam6|lib/assets/level/level007.txt', r'''29;19;20;
+#############################
+#                           #
+#  AB                       #
+#          #######     B    #
+#            W W       W    #
+#          # W W #          #
+#   W      # W W # ##########
+#          # W W # #*WWWWW*##
+#          # *B* # #BWWWWWB##
+#          # *B* #  #BWWWB# #
+#          # *B* #   #WWW#  #
+#          # *B* #    *W*   #
+#          # *B* #         E#
+#    W     # *B* ###### #####
+#          # *** #WFB*FFF*  #
+#                #  *FFFFF* #
+#          ######  *FFFFFFF*#
+#          BBBBBBB*FFFFFFFFF#
+#############################''')),
+  Levels.level999$txt: TextAsset(
+      AssetData(r'minibeansjam6|lib/assets/level/level999.txt', r'''38;31;1;
+######################################
+#                                    #
+#                 A                  #
+#                                    #
+#   BBBBB B   B   B    B   B B  B    #
+#     B   B   B  B B   BB  B B B     #
+#     B   BBBBB BBBBB  B B B BB      #
+#     B   B   B B   B  B  BB B B     #
+#     B   B   B B   B  B   B B  B    #
+#                                    #
+#         B   B  BB  B   B           #
+#          B B  B  B B   B           #
+#           B   B  B B   B           #
+#           B   B  B B   B           #
+#           B    BB   BBB            #
+#                                    #
+#         BBBBB  BB  BBBB            #
+#         B     B  B B   B           #
+#         BBB   B  B BBBB            #
+#         B     B  B B  B            #
+#         B      BB  B   B           #
+#                                    #
+# BBB  B      B  B   B B B   B  BB   #
+# B  B B     B B  B B  B BB  B B     #
+# BBB  B    BBBBB  B   B B B B B BB  #
+# B    B    B   B  B   B B  BB B   B #
+# B    BBBB B   B  B   B B   B  BBB  #
+#                                    #
+#                 E                  #
+#                                    #
+######################################
+'''))
 };
 
 enum Sfx { eatBean$ogg, lastBean$ogg, worldDrop$ogg }

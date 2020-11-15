@@ -12,6 +12,7 @@ import 'core/systems/next_level_system.dart';
 import 'core/systems/physics_system.dart';
 import 'html/input/controller_system.dart';
 import 'html/rendering/finish_game_system.dart';
+import 'html/rendering/level_status_rendering_system.dart';
 import 'html/rendering/sprite_rendering_system.dart';
 
 class Game extends GameBase {
@@ -45,6 +46,7 @@ class Game extends GameBase {
           SpriteRenderingSystem(ctx, spriteSheet),
           GameTimeSystem(),
           // FpsRenderingSystem(ctx, 'white'),
+          LevelStatusRenderingSystem(ctx),
           NextLevelSystem(),
           FinishGameSystem(ctx),
         ],

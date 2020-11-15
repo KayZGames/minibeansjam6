@@ -1,0 +1,32 @@
+38;31;1;
+######################################
+#                                    #
+#                 A                  #
+#                                    #
+#   BBBBB B   B   B    B   B B  B    #
+#     B   B   B  B B   BB  B B B     #
+#     B   BBBBB BBBBB  B B B BB      #
+#     B   B   B B   B  B  BB B B     #
+#     B   B   B B   B  B   B B  B    #
+#                                    #
+#         B   B  BB  B   B           #
+#          B B  B  B B   B           #
+#           B   B  B B   B           #
+#           B   B  B B   B           #
+#           B    BB   BBB            #
+#                                    #
+#         BBBBB  BB  BBBB            #
+#         B     B  B B   B           #
+#         BBB   B  B BBBB            #
+#         B     B  B B  B            #
+#         B      BB  B   B           #
+#                                    #
+# BBB  B      B  B   B B B   B  BB   #
+# B  B B     B B  B B  B BB  B B     #
+# BBB  B    BBBBB  B   B B B B B BB  #
+# B    B    B   B  B   B B  BB B   B #
+# B    BBBB B   B  B   B B   B  BBB  #
+#                                    #
+#                 E                  #
+#                                    #
+######################################

@@ -57,6 +57,10 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
     final canFall = canFallMapper[entity];
     final position = positionMapper[entity];
     if (canFall.falling) {
+      if (canFall.hasGhost) {
+        levelManager.removeGhost(position.x.floor(), position.y.floor());
+        canFall.hasGhost = false;
+      }
       final nextY = position.y + movementSpeed * world.delta;
       if (nextY.floor() == position.y.floor()) {
         position.y = nextY;
@@ -83,9 +87,12 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
       if (levelManager.canFall(entity, position.x.floor(), position.y.floor(),
           isFalling: false)) {
         final previousEntity = levelManager.startMovement(
-            position.x.floor(), position.y.floor(), 0, 1);
+            position.x.floor(), position.y.floor(), 0, 1,
+            ghostAtOriginalLocation: true);
         position.y += movementSpeed * world.delta;
-        canFall.falling = true;
+        canFall
+          ..falling = true
+          ..hasGhost = true;
         if (previousEntity != null &&
             canBeKilledByFallingObjectMapper.has(previousEntity)) {
           if (controllerMapper.has(previousEntity)) {

@@ -96,6 +96,7 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
               CanBeRolledOn(),
               Bean(),
             ]);
+            level.beansRemaining++;
             break;
           case LevelObject.world:
             components.addAll([
