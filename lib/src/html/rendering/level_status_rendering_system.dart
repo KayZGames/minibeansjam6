@@ -26,9 +26,10 @@ class LevelStatusRenderingSystem extends _$LevelStatusRenderingSystem {
 
     ctx.font = '30px Verdana';
 
-    final remainingText = '$remaining bean${remaining > 1 ? 's' : ''} in level';
+    final remainingText =
+        '$remaining bean${remaining != 1 ? 's' : ''} in level';
     final leftToCollectText =
-        '''$leftToCollect bean${leftToCollect > 1 ? 's' : ''} needed for next level''';
+        '''$leftToCollect bean${leftToCollect != 1 ? 's' : ''} needed for next level''';
 
     final leftToCollectWidth = ctx.measureText(leftToCollectText).width;
 
