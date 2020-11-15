@@ -21,6 +21,7 @@ abstract class _$CanFallPhysicsSystem extends PhysicsSystem {
   Mapper<CanBeKilledByFallingObject> canBeKilledByFallingObjectMapper;
   Mapper<Controller> controllerMapper;
   LevelManager levelManager;
+  AudioManager audioManager;
   _$CanFallPhysicsSystem() : super(Aspect.empty()..allOf([CanFall]));
   @override
   void initialize() {
@@ -30,6 +31,7 @@ abstract class _$CanFallPhysicsSystem extends PhysicsSystem {
         Mapper<CanBeKilledByFallingObject>(world);
     controllerMapper = Mapper<Controller>(world);
     levelManager = world.getManager<LevelManager>();
+    audioManager = world.getManager<AudioManager>();
   }
 }
 

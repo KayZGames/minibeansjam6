@@ -90,7 +90,7 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
             break;
           case LevelObject.bean:
             components.addAll([
-              CanFall(),
+              CanFall(Sfx.worldDrop$ogg),
               CanRoll(),
               CanBeConsumed(),
               CanBeRolledOn(),
@@ -99,7 +99,7 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
             break;
           case LevelObject.world:
             components.addAll([
-              CanFall(),
+              CanFall(Sfx.worldDrop$ogg),
               CanRoll(),
               CanBePushed(),
               CanBeRolledOn(),

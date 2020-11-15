@@ -3,6 +3,7 @@ import 'package:gamedev_helpers/gamedev_helpers.dart';
 
 import '../../components/components.dart';
 import '../config.dart';
+import '../managers/audio_manager.dart';
 import '../managers/level_manager.dart';
 
 part 'physics_system.g.dart';
@@ -47,6 +48,7 @@ abstract class PhysicsSystem extends _$PhysicsSystem {
   ],
   manager: [
     LevelManager,
+    AudioManager,
   ],
 )
 class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
@@ -74,6 +76,7 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
         } else {
           position.y = nextY.floorToDouble();
           canFall.falling = false;
+          audioManager.playAudio(canFall.fallSound);
         }
       }
     } else {

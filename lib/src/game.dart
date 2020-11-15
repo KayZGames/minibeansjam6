@@ -1,5 +1,8 @@
+import 'dart:web_audio';
+
 import 'package:gamedev_helpers/gamedev_helpers.dart';
 
+import 'core/managers/audio_manager.dart';
 import 'core/managers/game_state_manager.dart';
 import 'core/managers/level_manager.dart';
 import 'core/systems/controller_to_action_system.dart';
@@ -14,7 +17,8 @@ import 'html/rendering/sprite_rendering_system.dart';
 class Game extends GameBase {
   final GameStateManager gameStateManager;
   Game(this.gameStateManager)
-      : super('minibeansjam6', 'canvas#game', bodyDefsName: null);
+      : super('minibeansjam6', 'canvas#game',
+            bodyDefsName: null, audioContext: AudioContext());
 
   @override
   void createEntities() {
@@ -22,6 +26,7 @@ class Game extends GameBase {
     world
       ..addManager(tagManager)
       ..addManager(gameStateManager)
+      ..addManager(AudioManager())
       ..addManager(LevelManager());
   }
 
@@ -39,9 +44,15 @@ class Game extends GameBase {
           NebulaRenderingSystem(ctx, spriteSheet),
           SpriteRenderingSystem(ctx, spriteSheet),
           GameTimeSystem(),
-          FpsRenderingSystem(ctx, 'white'),
+          // FpsRenderingSystem(ctx, 'white'),
           NextLevelSystem(),
           FinishGameSystem(ctx),
         ],
       };
+
+  @override
+  void resume() {
+    super.resume();
+    world.getManager<AudioManager>().resume();
+  }
 }

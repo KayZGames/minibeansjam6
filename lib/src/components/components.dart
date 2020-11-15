@@ -1,5 +1,7 @@
 import 'package:dartemis/dartemis.dart';
 
+import '../assets.dart';
+
 class Controller extends Component {
   bool up, down, left, right, space, restart;
   PlayerState state;
@@ -28,6 +30,8 @@ class Controller extends Component {
 
 class CanFall extends Component {
   bool falling = false;
+  Sfx fallSound;
+  CanFall(this.fallSound);
 }
 
 class CanRoll extends Component {
@@ -48,7 +52,9 @@ class CanBeConsumed extends Component {
 }
 
 class Bean extends Component {}
+
 class Border extends Component {}
+
 class Nebula extends Component {}
 
 class CanBeKilledByFallingObject extends Component {}

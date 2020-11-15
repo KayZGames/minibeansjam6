@@ -14,6 +14,7 @@ abstract class _$LevelManager extends Manager {
   Mapper<Bean> beanMapper;
   Mapper<Renderable> renderableMapper;
   TagManager tagManager;
+  AudioManager audioManager;
   @override
   void initialize() {
     super.initialize();
@@ -24,5 +25,6 @@ abstract class _$LevelManager extends Manager {
     beanMapper = Mapper<Bean>(world);
     renderableMapper = Mapper<Renderable>(world);
     tagManager = world.getManager<TagManager>();
+    audioManager = world.getManager<AudioManager>();
   }
 }

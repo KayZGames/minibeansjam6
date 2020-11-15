@@ -1,8 +1,10 @@
 import 'package:dartemis/dartemis.dart';
 import 'package:gamedev_helpers/gamedev_helpers.dart';
 
+import '../../assets.dart';
 import '../../components/components.dart';
 import '../config.dart';
+import 'audio_manager.dart';
 
 part 'level_manager.g.dart';
 
@@ -18,6 +20,7 @@ part 'level_manager.g.dart';
   ],
   manager: [
     TagManager,
+    AudioManager,
   ],
 )
 class LevelManager extends _$LevelManager {
@@ -104,9 +107,13 @@ class LevelManager extends _$LevelManager {
     final field = _level.currentGrid[x + moveX][y + moveY];
     if (field.entity != null && beanMapper.has(field.entity)) {
       _level.beansCollected++;
+
       if (_level.beansCollected == _level.beansRequired) {
         final end = tagManager.getEntity(endTag);
         renderableMapper[end].name = 'end_open';
+        audioManager.playAudio(Sfx.lastBean$ogg);
+      } else {
+        audioManager.playAudio(Sfx.eatBean$ogg);
       }
     }
     world.deleteEntity(field.entity);
@@ -156,7 +163,6 @@ class LevelManager extends _$LevelManager {
       final fieldBelowSide = _level.currentGrid[x + rollX][y + 1];
       if (fieldOnSide.object == LevelObject.empty &&
           fieldBelowSide.object == LevelObject.empty) {
-        print(fieldBelow.object);
         return true;
       }
     }
