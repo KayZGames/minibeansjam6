@@ -1,7 +1,9 @@
 import 'dart:web_audio';
 
+import 'package:dartemis/dartemis.dart';
 import 'package:gamedev_helpers/gamedev_helpers.dart';
 
+import 'assets.dart';
 import 'core/managers/audio_manager.dart';
 import 'core/managers/game_state_manager.dart';
 import 'core/managers/level_manager.dart';
@@ -19,7 +21,10 @@ class Game extends GameBase {
   final GameStateManager gameStateManager;
   Game(this.gameStateManager)
       : super('minibeansjam6', 'canvas#game',
-            bodyDefsName: null, audioContext: AudioContext());
+            spriteSheetImg: spriteSheetImg,
+            spriteSheetJson: spriteSheetJson,
+            bodyDefsName: null,
+            audioContext: AudioContext());
 
   @override
   void createEntities() {
