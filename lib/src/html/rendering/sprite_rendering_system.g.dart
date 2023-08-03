@@ -6,12 +6,12 @@ part of 'sprite_rendering_system.dart';
 // SystemGenerator
 // **************************************************************************
 
-abstract class _$SpriteRenderingSystem extends EntityProcessingSystem {
-  Mapper<Position> positionMapper;
-  Mapper<Renderable> renderableMapper;
-  Mapper<Orientation> orientationMapper;
-  TagManager tagManager;
-  CameraManager cameraManager;
+abstract class _$SpriteRenderingSystem extends EntitySystem {
+  late final Mapper<Position> positionMapper;
+  late final Mapper<Renderable> renderableMapper;
+  late final Mapper<Orientation> orientationMapper;
+  late final TagManager tagManager;
+  late final CameraManager cameraManager;
   _$SpriteRenderingSystem()
       : super(Aspect.empty()
           ..allOf([Position, Renderable, Orientation])
@@ -25,14 +25,28 @@ abstract class _$SpriteRenderingSystem extends EntityProcessingSystem {
     tagManager = world.getManager<TagManager>();
     cameraManager = world.getManager<CameraManager>();
   }
+
+  @override
+  void processEntities(Iterable<int> entities) {
+    final positionMapper = this.positionMapper;
+    final renderableMapper = this.renderableMapper;
+    final orientationMapper = this.orientationMapper;
+    for (final entity in entities) {
+      processEntity(entity, positionMapper[entity], renderableMapper[entity],
+          orientationMapper[entity]);
+    }
+  }
+
+  void processEntity(int entity, Position position, Renderable renderable,
+      Orientation orientation);
 }
 
 abstract class _$CachedSpriteRenderingSystem extends EntitySystem {
-  Mapper<Position> positionMapper;
-  Mapper<Renderable> renderableMapper;
-  LevelManager levelManager;
-  CameraManager cameraManager;
-  TagManager tagManager;
+  late final Mapper<Position> positionMapper;
+  late final Mapper<Renderable> renderableMapper;
+  late final LevelManager levelManager;
+  late final CameraManager cameraManager;
+  late final TagManager tagManager;
   _$CachedSpriteRenderingSystem(Aspect aspect)
       : super(aspect..allOf([Position, Renderable]));
   @override
@@ -47,7 +61,7 @@ abstract class _$CachedSpriteRenderingSystem extends EntitySystem {
 }
 
 abstract class _$BorderRenderingSystem extends CachedSpriteRenderingSystem {
-  Mapper<Border> borderMapper;
+  late final Mapper<Border> borderMapper;
   _$BorderRenderingSystem(CanvasRenderingContext2D ctx, SpriteSheet sheet)
       : super(ctx, sheet, Aspect.empty()..allOf([Border]));
   @override
@@ -58,7 +72,7 @@ abstract class _$BorderRenderingSystem extends CachedSpriteRenderingSystem {
 }
 
 abstract class _$NebulaRenderingSystem extends CachedSpriteRenderingSystem {
-  Mapper<Nebula> nebulaMapper;
+  late final Mapper<Nebula> nebulaMapper;
   _$NebulaRenderingSystem(CanvasRenderingContext2D ctx, SpriteSheet sheet)
       : super(ctx, sheet, Aspect.empty()..allOf([Nebula]));
   @override

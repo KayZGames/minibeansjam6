@@ -1,4 +1,4 @@
-import 'package:angular/angular.dart';
+import 'package:ngdart/angular.dart';
 
 import 'src/angular/game_menu.dart';
 import 'src/angular/game_service.dart';

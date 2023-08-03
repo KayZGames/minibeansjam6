@@ -8,11 +8,10 @@ analyzer:
     unused_import: error
     unused_local_variable: error
     dead_code: error
-  strong-mode:
-    implicit-casts: false
 language:
   strict-inference: true
   strict-raw-types: true
+  strict-casts: true
 # https://dart-lang.github.io/linter/lints/options/options.html
 linter:
   rules:
@@ -76,14 +75,11 @@ linter:
     - file_names
     - hash_and_equals
     - implementation_imports
-    - invariant_booleans
-    - iterable_contains_unrelated_type
     - join_return_with_assignment
     - leading_newlines_in_multiline_strings
     - library_names
     - library_prefixes
     - lines_longer_than_80_chars
-    - list_remove_unrelated_type
     - literal_only_boolean_expressions
     - missing_whitespace_between_adjacent_strings
     - no_adjacent_strings_in_list
@@ -111,7 +107,6 @@ linter:
     - prefer_const_literals_to_create_immutables
     - prefer_constructors_over_static_methods
     - prefer_contains
-    - prefer_equal_for_default_values
     - prefer_expression_function_bodies
     - prefer_final_fields
     - prefer_final_in_for_each

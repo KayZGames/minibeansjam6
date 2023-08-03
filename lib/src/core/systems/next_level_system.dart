@@ -19,8 +19,7 @@ part 'next_level_system.g.dart';
 )
 class NextLevelSystem extends _$NextLevelSystem {
   @override
-  void processEntity(int entity) {
-    final controller = controllerMapper[entity];
+  void processEntity(int entity, Controller controller) {
     if (controller.state == PlayerState.finishLevel) {
       if (levelManager.levelNumber < Levels.values.length - 1) {
         levelManager.nextLevel();

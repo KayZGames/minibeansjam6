@@ -1,26 +1,16 @@
-25;25;22;
-#########################
-#BWWWWWWWWWWEWWWWWWWWWWB#
-F#BWWWWWWWWWWWWWWWWWWWB#
-FF#BWWWWWWWWWWWWWWWWWB#
-FFF#BWWWWWWWWWWWWWWWB#
-FFFF#BWWWWWWWWWWWWWB#
-FFFFF#BWWWWWWWWWWWB#
-FFFFFF#BWWWWWWWWWB#
-FFFFFFF#BWWWWWWWB#
-FFFFFFFF#BWWWWWB#
-FFFFFFFFF#BWWWB#
-FFFFFFFFFF#BWB#
-############W############
-#FFFFFFFFFFF FFFFFFFFFFF#
-#FFFFFFFFFFF*FFFFFFFFFFF#
-#FFFFFFFFFFFFFFFFFFFFFFF#
-#FFFFFFFFFFFAFFFFFFFFFFF#
-#FFFFFFFFFFFFFFFFFFFFFFF#
-#FFFFFFFFFFFFFFFFFFFFFFF#
-#FFFFFFFFFFFFFFFFFFFFFFF#
-#FFFFFFFFFFFFFFFFFFFFFFF#
-#FFFFFFFFFFFFFFFFFFFFFFF#
-#FFFFFFFFFFFFFFFFFFFFFFF#
-#FFFFFFFFFFFFFFFFFFFFFFF#
-#########################
+24;15;20;
+########################
+#               #W#    #
+#  A              #    #
+#               #B#    #
+#      W        #B#    #
+#     BW        #B#    #
+#     BW        #B#    #
+#     BW        #B#    #
+#     BW        #B#    #
+#     BW        #B#    #
+#     BW        #B######
+#     BW        #B     #
+#     BW        #B  E  #
+#    #BW        #B     #
+########################

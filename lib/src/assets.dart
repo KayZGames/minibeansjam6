@@ -1,5 +1,4 @@
-import 'package:aspen/aspen.dart';
-import 'package:aspen_assets/aspen_assets.dart';
+import 'package:asset_data/asset_data.dart';
 
 part 'assets.g.dart';
 

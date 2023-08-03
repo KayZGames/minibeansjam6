@@ -15,6 +15,9 @@ part 'physics_system.g.dart';
   allOf: [
     Position,
   ],
+  manager: [
+    LevelManager,
+  ],
 )
 abstract class PhysicsSystem extends _$PhysicsSystem {
   PhysicsSystem(Aspect aspect) : super(aspect);
@@ -36,7 +39,7 @@ abstract class PhysicsSystem extends _$PhysicsSystem {
   void processEntity(int entity);
 
   @override
-  bool checkProcessing() => true;
+  bool checkProcessing() => levelManager.levelLoaded;
 }
 
 @Generate(
@@ -49,7 +52,6 @@ abstract class PhysicsSystem extends _$PhysicsSystem {
     Controller,
   ],
   manager: [
-    LevelManager,
     AudioManager,
   ],
 )
@@ -113,9 +115,6 @@ class CanFallPhysicsSystem extends _$CanFallPhysicsSystem {
     CanRoll,
     Orientation,
   ],
-  manager: [
-    LevelManager,
-  ],
 )
 class CanRollPhysicsSystem extends _$CanRollPhysicsSystem {
   @override
@@ -168,10 +167,8 @@ class CanRollPhysicsSystem extends _$CanRollPhysicsSystem {
 )
 class PushSystem extends _$PushSystem {
   @override
-  void processEntity(int entity) {
-    final canBePushed = canBePushedMapper[entity];
+  void processEntity(int entity, Position position, CanBePushed canBePushed) {
     if (canBePushed.pushed) {
-      final position = positionMapper[entity];
       final nextX = position.x + canBePushed.x * movementSpeed * world.delta;
       if (canBePushed.x > 0) {
         if (nextX.floor() == position.x.floor()) {

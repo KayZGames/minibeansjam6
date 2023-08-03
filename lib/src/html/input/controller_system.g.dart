@@ -7,9 +7,9 @@ part of 'controller_system.dart';
 // **************************************************************************
 
 abstract class _$ControllerSystem extends GenericInputHandlingSystem {
-  Mapper<Controller> controllerMapper;
-  GameStateManager gameStateManager;
-  _$ControllerSystem(List ignoreInputFromElements)
+  late final Mapper<Controller> controllerMapper;
+  late final GameStateManager gameStateManager;
+  _$ControllerSystem(List<Element> ignoreInputFromElements)
       : super(Aspect.empty()..allOf([Controller]), ignoreInputFromElements);
   @override
   void initialize() {

@@ -26,7 +26,7 @@ part 'sprite_rendering_system.g.dart';
   ],
 )
 class SpriteRenderingSystem extends _$SpriteRenderingSystem {
-  double _cameraX, _cameraY;
+  double _cameraX = 0, _cameraY = 0;
   CanvasRenderingContext2D ctx;
   SpriteSheet sheet;
   SpriteRenderingSystem(this.ctx, this.sheet);
@@ -42,14 +42,12 @@ class SpriteRenderingSystem extends _$SpriteRenderingSystem {
   }
 
   @override
-  void processEntity(int entity) {
-    final position = positionMapper[entity];
-    final renderable = renderableMapper[entity];
-    final orientation = orientationMapper[entity];
+  void processEntity(int entity, Position position, Renderable renderable,
+      Orientation orientation) {
     final name = renderable.name;
     assert(sheet.sprites.containsKey(name),
         'sprite $name does not exist in ${sheet.sprites.keys.join(', ')}');
-    final sprite = sheet.sprites[name];
+    final sprite = sheet.sprites[name]!;
 
     ctx
       ..save()
@@ -91,10 +89,10 @@ class SpriteRenderingSystem extends _$SpriteRenderingSystem {
 )
 abstract class CachedSpriteRenderingSystem
     extends _$CachedSpriteRenderingSystem {
-  double _cameraX, _cameraY;
+  late double _cameraX, _cameraY;
   Set<int> _cachedEntities = <int>{};
-  CanvasElement _overlayCanvas;
-  CanvasElement _maskCanvas;
+  late CanvasElement _overlayCanvas;
+  CanvasElement? _maskCanvas;
 
   final CanvasRenderingContext2D ctx;
   final SpriteSheet sheet;
@@ -119,9 +117,9 @@ abstract class CachedSpriteRenderingSystem
       final width = levelManager.levelWidth;
       final height = levelManager.levelHeight;
       if (_maskCanvas != null &&
-          _maskCanvas.width == width &&
-          _maskCanvas.height == height) {
-        _maskCanvas.context2D.clearRect(0, 0, width, height);
+          _maskCanvas!.width == width &&
+          _maskCanvas!.height == height) {
+        _maskCanvas!.context2D.clearRect(0, 0, width, height);
         _overlayCanvas.context2D
             .clearRect(0, 0, width * tileSize, height * tileSize);
       } else {
@@ -129,7 +127,7 @@ abstract class CachedSpriteRenderingSystem
         _overlayCanvas =
             CanvasElement(width: width * tileSize, height: height * tileSize);
       }
-      final maskCtx = _maskCanvas.context2D..fillStyle = 'white';
+      final maskCtx = _maskCanvas!.context2D..fillStyle = 'white';
       final overlayCtx = _overlayCanvas.context2D;
       for (final entity in entitiesSet) {
         final position = positionMapper[entity];
@@ -155,7 +153,7 @@ abstract class CachedSpriteRenderingSystem
       _overlayCanvas.context2D
         ..globalCompositeOperation = 'destination-in'
         ..drawImageScaled(
-            _maskCanvas, 0, 0, _overlayCanvas.width, _overlayCanvas.height)
+            _maskCanvas!, 0, 0, _overlayCanvas.width!, _overlayCanvas.height!)
         ..globalCompositeOperation = 'source-over';
     }
 

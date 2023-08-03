@@ -7,21 +7,23 @@ part of 'physics_system.dart';
 // **************************************************************************
 
 abstract class _$PhysicsSystem extends EntitySystem {
-  Mapper<Position> positionMapper;
+  late final Mapper<Position> positionMapper;
+  late final LevelManager levelManager;
   _$PhysicsSystem(Aspect aspect) : super(aspect..allOf([Position]));
   @override
   void initialize() {
     super.initialize();
     positionMapper = Mapper<Position>(world);
+    levelManager = world.getManager<LevelManager>();
   }
 }
 
 abstract class _$CanFallPhysicsSystem extends PhysicsSystem {
-  Mapper<CanFall> canFallMapper;
-  Mapper<CanBeKilledByFallingObject> canBeKilledByFallingObjectMapper;
-  Mapper<Controller> controllerMapper;
-  LevelManager levelManager;
-  AudioManager audioManager;
+  late final Mapper<CanFall> canFallMapper;
+  late final Mapper<CanBeKilledByFallingObject>
+      canBeKilledByFallingObjectMapper;
+  late final Mapper<Controller> controllerMapper;
+  late final AudioManager audioManager;
   _$CanFallPhysicsSystem() : super(Aspect.empty()..allOf([CanFall]));
   @override
   void initialize() {
@@ -30,15 +32,13 @@ abstract class _$CanFallPhysicsSystem extends PhysicsSystem {
     canBeKilledByFallingObjectMapper =
         Mapper<CanBeKilledByFallingObject>(world);
     controllerMapper = Mapper<Controller>(world);
-    levelManager = world.getManager<LevelManager>();
     audioManager = world.getManager<AudioManager>();
   }
 }
 
 abstract class _$CanRollPhysicsSystem extends PhysicsSystem {
-  Mapper<CanRoll> canRollMapper;
-  Mapper<Orientation> orientationMapper;
-  LevelManager levelManager;
+  late final Mapper<CanRoll> canRollMapper;
+  late final Mapper<Orientation> orientationMapper;
   _$CanRollPhysicsSystem()
       : super(Aspect.empty()..allOf([CanRoll, Orientation]));
   @override
@@ -46,13 +46,12 @@ abstract class _$CanRollPhysicsSystem extends PhysicsSystem {
     super.initialize();
     canRollMapper = Mapper<CanRoll>(world);
     orientationMapper = Mapper<Orientation>(world);
-    levelManager = world.getManager<LevelManager>();
   }
 }
 
-abstract class _$PushSystem extends EntityProcessingSystem {
-  Mapper<Position> positionMapper;
-  Mapper<CanBePushed> canBePushedMapper;
+abstract class _$PushSystem extends EntitySystem {
+  late final Mapper<Position> positionMapper;
+  late final Mapper<CanBePushed> canBePushedMapper;
   _$PushSystem() : super(Aspect.empty()..allOf([Position, CanBePushed]));
   @override
   void initialize() {
@@ -60,4 +59,15 @@ abstract class _$PushSystem extends EntityProcessingSystem {
     positionMapper = Mapper<Position>(world);
     canBePushedMapper = Mapper<CanBePushed>(world);
   }
+
+  @override
+  void processEntities(Iterable<int> entities) {
+    final positionMapper = this.positionMapper;
+    final canBePushedMapper = this.canBePushedMapper;
+    for (final entity in entities) {
+      processEntity(entity, positionMapper[entity], canBePushedMapper[entity]);
+    }
+  }
+
+  void processEntity(int entity, Position position, CanBePushed canBePushed);
 }

@@ -4,10 +4,11 @@ import '../core/managers/game_state_manager.dart';
 import '../game.dart';
 
 class GameService {
-  Game _game;
+  late Game _game;
+  bool gameCanStart = false;
   bool error = false;
-  Object errorMessage;
-  StackTrace stackTrace;
+  Object? errorMessage;
+  StackTrace? stackTrace;
 
   final GameStateManager gameStateManager;
 
@@ -15,13 +16,14 @@ class GameService {
 
   bool get menuVisible => gameStateManager.state == GameState.menu || error;
 
-  bool get gameCanStart => _game != null;
+
 
   void initGame() {
     runZonedGuarded(() {
       _game = Game(gameStateManager)
         ..start()
         ..pause();
+      gameCanStart = true;
     }, (errorMessage, stackTrace) {
       error = true;
       this.errorMessage = errorMessage;

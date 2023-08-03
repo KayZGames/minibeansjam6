@@ -21,7 +21,7 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
   @override
   void processSystem() {
     final levelAsset = levels[Levels.values[levelManager.levelNumber]];
-    final levelDefinition = levelAsset.text;
+    final levelDefinition = levelAsset.content;
     final levelData = levelDefinition.split(';');
     final beansRequired = int.parse(levelData[2]);
     final width = int.parse(levelData[0]);
@@ -126,6 +126,8 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
           case LevelObject.end:
           case LevelObject.ghost:
             break;
+          case null:
+            throw Exception('no object at $x:$y');
         }
         final entity = world.createEntity(components);
         field.entity = entity;

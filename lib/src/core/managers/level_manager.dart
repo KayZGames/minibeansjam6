@@ -25,14 +25,14 @@ part 'level_manager.g.dart';
 )
 class LevelManager extends _$LevelManager {
   int _levelNumber = 0;
-  Level _level;
+  late Level _level;
+  bool levelLoaded = false;
   final Map<int, LevelField> _entities = {};
 
-  bool get levelLoaded => _level != null;
   int get levelNumber => _levelNumber;
 
-  int get levelWidth => _level?.currentGrid?.length ?? 0;
-  int get levelHeight => _level?.currentGrid[0].length ?? 0;
+  int get levelWidth => levelLoaded ? _level.currentGrid.length : 0;
+  int get levelHeight => levelLoaded ? _level.currentGrid[0].length : 0;
 
   Level get level => _level;
   set level(Level level) {
@@ -40,9 +40,12 @@ class LevelManager extends _$LevelManager {
     for (var x = 0; x < level.currentGrid.length; x++) {
       for (var y = 0; y < level.currentGrid[x].length; y++) {
         final field = level.currentGrid[x][y];
-        _entities[field.entity] = field;
+        if (field.entity != null) {
+          _entities[field.entity!] = field;
+        }
       }
     }
+    levelLoaded = true;
   }
 
   @override
@@ -56,10 +59,11 @@ class LevelManager extends _$LevelManager {
   }
 
   PlayerState playerStateForMove(int x, int y, int moveX, int moveY) {
-    final field = _level.currentGrid[x + moveX][y + moveY];
+    final level = _level;
+    final field = level.currentGrid[x + moveX][y + moveY];
     switch (field.object) {
       case LevelObject.end:
-        if (_level.beansRequired <= _level.beansCollected) {
+        if (level.beansRequired <= level.beansCollected) {
           return PlayerState.finishLevel;
         }
         return PlayerState.stay;
@@ -69,8 +73,8 @@ class LevelManager extends _$LevelManager {
         return PlayerState.move;
       case LevelObject.nebula:
       case LevelObject.bean:
-        if (canFallMapper.has(field.entity)) {
-          if (canFallMapper[field.entity].falling) {
+        if (canFallMapper.has(field.entity!)) {
+          if (canFallMapper[field.entity!].falling) {
             return PlayerState.stay;
           }
         }
@@ -86,8 +90,9 @@ class LevelManager extends _$LevelManager {
           return PlayerState.push;
         }
         return PlayerState.stay;
+      case null:
+        throw Exception('field@${field.x}:${field.y} is null');
     }
-    throw Exception('field@${field.x}:${field.y} is null');
   }
 
   bool isBlockedForWorld(int x, int y, int deltaX, int deltaY) {
@@ -104,27 +109,28 @@ class LevelManager extends _$LevelManager {
       case LevelObject.star:
       case LevelObject.bean:
         return true;
+      case null:
+        throw Exception('field@${field.x}:${field.y} is null');
     }
-    throw Exception('field@${field.x}:${field.y} is null');
   }
 
   void eat(int x, int y, int moveX, int moveY) {
     final field = _level.currentGrid[x + moveX][y + moveY];
-    if (field.entity != null && beanMapper.has(field.entity)) {
+    if (field.entity != null && beanMapper.has(field.entity!)) {
       _level.beansCollected++;
       _level.beansRemaining--;
       if (_level.beansCollected == _level.beansRequired) {
         final end = tagManager.getEntity(endTag);
-        renderableMapper[end].name = 'end_open';
+        renderableMapper[end!].name = 'end_open';
         audioManager.playAudio(Sfx.lastBean$ogg);
       } else {
         audioManager.playAudio(Sfx.eatBean$ogg);
       }
     }
-    world.deleteEntity(field.entity);
+    world.deleteEntity(field.entity!);
   }
 
-  bool canFall(int entity, int x, int y, {bool isFalling}) {
+  bool canFall(int? entity, int x, int y, {required bool isFalling}) {
     if (!isFalling) {
       if (entity != null) {
         final canRoll = canRollMapper.getSafe(entity);
@@ -150,11 +156,12 @@ class LevelManager extends _$LevelManager {
       case LevelObject.star:
       case LevelObject.bean:
         return false;
+      case null:
+        throw Exception('field@${field.x}:${field.y} is null');
     }
-    throw Exception('field@${field.x}:${field.y} is null');
   }
 
-  bool canRoll(int entity, int x, int y, int rollX) {
+  bool canRoll(int? entity, int x, int y, int rollX) {
     if (entity != null) {
       final canFall = canFallMapper.getSafe(entity);
       if (canFall != null && canFall.falling) {
@@ -163,7 +170,7 @@ class LevelManager extends _$LevelManager {
     }
     final fieldBelow = _level.currentGrid[x][y + 1];
     if (fieldBelow.entity != null &&
-        canBeRolledOnMapper.has(fieldBelow.entity)) {
+        canBeRolledOnMapper.has(fieldBelow.entity!)) {
       final fieldOnSide = _level.currentGrid[x + rollX][y];
       final fieldBelowSide = _level.currentGrid[x + rollX][y + 1];
       if (fieldOnSide.object == LevelObject.empty &&
@@ -174,7 +181,7 @@ class LevelManager extends _$LevelManager {
     return false;
   }
 
-  int startMovement(int x, int y, int moveX, int moveY,
+  int? startMovement(int x, int y, int moveX, int moveY,
       {bool ghostAtOriginalLocation = false}) {
     final currentField = _level.currentGrid[x][y];
     final nextField = _level.currentGrid[x + moveX][y + moveY];
@@ -183,7 +190,7 @@ class LevelManager extends _$LevelManager {
       ..object = currentField.object
       ..entity = currentField.entity;
 
-    _entities[currentField.entity] = nextField;
+    _entities[currentField.entity!] = nextField;
 
     currentField
       ..object = ghostAtOriginalLocation ? LevelObject.ghost : LevelObject.empty
@@ -201,14 +208,14 @@ class LevelManager extends _$LevelManager {
 
   void nextLevel() {
     _levelNumber++;
-    _level = null;
+    levelLoaded = false;
     world.deleteAllEntities();
   }
 
   void push(int x, int y, int moveX) {
     final entity = _level.currentGrid[x][y].entity;
     assert(entity != null, 'null entity at $x:$y');
-    if (canBePushedMapper.has(entity)) {
+    if (canBePushedMapper.has(entity!)) {
       canBePushedMapper[entity]
         ..pushed = true
         ..x = moveX;
@@ -217,7 +224,7 @@ class LevelManager extends _$LevelManager {
   }
 
   void restartLevel() {
-    _level = null;
+    levelLoaded = false;
     world.deleteAllEntities();
   }
 }
@@ -232,8 +239,8 @@ class Level {
 
 class LevelField {
   final int x, y;
-  LevelObject object;
-  int entity;
+  LevelObject? object;
+  int? entity;
   LevelField(this.x, this.y, {this.object = LevelObject.empty, this.entity});
 }
 

@@ -28,7 +28,7 @@ class FinishGameSystem extends _$FinishGameSystem {
     ctx.font = '40px Verdana';
 
     const winnerText = 'WINNER, WINNER, BEANS FOR DINNER';
-    final winnerTextWidth = ctx.measureText(winnerText).width;
+    final winnerTextWidth = ctx.measureText(winnerText).width!;
     ctx
       ..fillStyle = '#101010F0'
       ..fillRect(centerWidth - winnerTextWidth / 2 - 10, centerHeight - 60,
@@ -39,7 +39,7 @@ class FinishGameSystem extends _$FinishGameSystem {
       ..font = '20px Verdana';
 
     const completionText = 'You completed the game in';
-    final completiongTextWidth = ctx.measureText(completionText).width;
+    final completiongTextWidth = ctx.measureText(completionText).width!;
     ctx.fillText(
         completionText, centerWidth - completiongTextWidth / 2, centerHeight);
 
@@ -48,7 +48,7 @@ class FinishGameSystem extends _$FinishGameSystem {
     final seconds = ((time % 60) ~/ 1).toString().padLeft(2, '0');
     final ms = (((time % 1) * 1000) ~/ 1).toString().padLeft(3, '0');
     final timeText = '$minutes:$seconds:$ms';
-    final timeTextWidth = ctx.measureText(timeText).width;
+    final timeTextWidth = ctx.measureText(timeText).width!;
     ctx.fillText(timeText, centerWidth - timeTextWidth / 2, centerHeight + 30);
   }
 

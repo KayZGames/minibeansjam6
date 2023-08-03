@@ -20,35 +20,28 @@ import 'html/rendering/sprite_rendering_system.dart';
 class Game extends GameBase {
   final GameStateManager gameStateManager;
   Game(this.gameStateManager)
-      : super('minibeansjam6', 'canvas#game',
+      : super('minibeansjam6',
             spriteSheetImg: spriteSheetImg,
             spriteSheetJson: spriteSheetJson,
             bodyDefsName: null,
             audioContext: AudioContext());
 
   @override
-  void createEntities() {
-    final tagManager = TagManager();
-    world
-      ..addManager(tagManager)
-      ..addManager(gameStateManager)
-      ..addManager(AudioManager())
-      ..addManager(LevelManager());
-  }
+  void createEntities() {}
 
   @override
   Map<int, List<EntitySystem>> getSystems() => {
         GameBase.rendering: [
-          LevelLoadingSystem(spriteSheet),
+          LevelLoadingSystem(spriteSheet!),
           ControllerSystem(),
           ControllerToActionSystem(),
           PushSystem(),
           CanFallPhysicsSystem(),
           CanRollPhysicsSystem(),
           CanvasCleaningSystem(canvas, fillStyle: 'green'),
-          BorderRenderingSystem(ctx, spriteSheet),
-          NebulaRenderingSystem(ctx, spriteSheet),
-          SpriteRenderingSystem(ctx, spriteSheet),
+          BorderRenderingSystem(ctx, spriteSheet!),
+          NebulaRenderingSystem(ctx, spriteSheet!),
+          SpriteRenderingSystem(ctx, spriteSheet!),
           GameTimeSystem(),
           // FpsRenderingSystem(ctx, 'white'),
           LevelStatusRenderingSystem(ctx),
@@ -62,4 +55,12 @@ class Game extends GameBase {
     super.resume();
     world.getManager<AudioManager>().resume();
   }
+
+  @override
+  List<Manager> getManagers() => [
+        TagManager(),
+        gameStateManager,
+        AudioManager(),
+        LevelManager(),
+      ];
 }

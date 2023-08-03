@@ -7,8 +7,8 @@ part of 'level_status_rendering_system.dart';
 // **************************************************************************
 
 abstract class _$LevelStatusRenderingSystem extends VoidEntitySystem {
-  LevelManager levelManager;
-  CameraManager cameraManager;
+  late final LevelManager levelManager;
+  late final CameraManager cameraManager;
   @override
   void initialize() {
     super.initialize();

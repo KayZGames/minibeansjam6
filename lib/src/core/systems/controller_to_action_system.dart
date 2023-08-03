@@ -21,12 +21,10 @@ part 'controller_to_action_system.g.dart';
 )
 class ControllerToActionSystem extends _$ControllerToActionSystem {
   @override
-  void processEntity(int entity) {
-    final controller = controllerMapper[entity];
+  void processEntity(int entity, Controller controller, Position position) {
     if (controller.restart) {
       return;
     }
-    final position = positionMapper[entity];
     var moveX = 0;
     var moveY = 0;
 

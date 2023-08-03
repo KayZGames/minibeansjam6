@@ -7,8 +7,8 @@ part of 'level_loading_system.dart';
 // **************************************************************************
 
 abstract class _$LevelLoadingSystem extends VoidEntitySystem {
-  TagManager tagManager;
-  LevelManager levelManager;
+  late final TagManager tagManager;
+  late final LevelManager levelManager;
   @override
   void initialize() {
     super.initialize();

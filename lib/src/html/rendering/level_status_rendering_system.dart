@@ -32,7 +32,7 @@ class LevelStatusRenderingSystem extends _$LevelStatusRenderingSystem {
     final leftToCollectText =
         '''$leftToCollect bean${leftToCollect != 1 ? 's' : ''} needed for next level''';
 
-    final leftToCollectWidth = ctx.measureText(leftToCollectText).width;
+    final leftToCollectWidth = ctx.measureText(leftToCollectText).width!;
 
     ctx
       ..fillStyle = 'grey'

@@ -7,9 +7,9 @@ part of 'finish_game_system.dart';
 // **************************************************************************
 
 abstract class _$FinishGameSystem extends VoidEntitySystem {
-  GameTimeSystem gameTimeSystem;
-  GameStateManager gameStateManager;
-  CameraManager cameraManager;
+  late final GameTimeSystem gameTimeSystem;
+  late final GameStateManager gameStateManager;
+  late final CameraManager cameraManager;
   @override
   void initialize() {
     super.initialize();

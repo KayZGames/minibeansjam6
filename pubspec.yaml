@@ -2,27 +2,29 @@ name: minibeansjam6
 publish_to: none
 
 environment:
-  sdk: '>=2.11.0 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
-dependencies: 
-  angular: ^6.0.1
-  aspen: ^0.3.0
-  aspen_assets: ^0.4.0
-  dartemis: ^0.8.0
+dependencies:
+  asset_data:
+    git:
+      url: https://github.com/KayZGames/asset_data.git
+      ref: tags/1.0.0
+  dartemis: ^0.9.0
   gamedev_helpers:
     git:
-      url: git@github.com:kayzgames/gamedev_helpers.git
-      ref: aspen040
+      url: https://github.com/KayZGames/gamedev_helpers.git
+      ref: tags/2.1.0
+  ngdart: ^8.0.0-dev
 
 dev_dependencies:
-  aspen_builder: ^0.4.0
-  build_runner: ^1.10.4
-  build_web_compilers: ^2.13.0
-  dartemis_builder: ^0.1.0+1
-  sass_builder: ^2.1.3
+  asset_builder:
+    git:
+      url: https://github.com/KayZGames/asset_builder.git
+      ref: tags/1.0.2
+  build_runner: ^2.2.0
+  build_web_compilers: ^4.0.5
+  dartemis_builder: ^0.3.0
+  sass_builder: ^2.1.4
 
 dependency_overrides:
-  aspen_assets:
-    path: ../aspen/aspen_assets
-  aspen_builder:
-    path: ../aspen/aspen_builder
+  build_modules: ^5.0.0

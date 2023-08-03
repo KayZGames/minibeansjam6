@@ -7,14 +7,14 @@ part of 'level_manager.dart';
 // **************************************************************************
 
 abstract class _$LevelManager extends Manager {
-  Mapper<CanBeRolledOn> canBeRolledOnMapper;
-  Mapper<CanRoll> canRollMapper;
-  Mapper<CanFall> canFallMapper;
-  Mapper<CanBePushed> canBePushedMapper;
-  Mapper<Bean> beanMapper;
-  Mapper<Renderable> renderableMapper;
-  TagManager tagManager;
-  AudioManager audioManager;
+  late final Mapper<CanBeRolledOn> canBeRolledOnMapper;
+  late final Mapper<CanRoll> canRollMapper;
+  late final Mapper<CanFall> canFallMapper;
+  late final Mapper<CanBePushed> canBePushedMapper;
+  late final Mapper<Bean> beanMapper;
+  late final Mapper<Renderable> renderableMapper;
+  late final TagManager tagManager;
+  late final AudioManager audioManager;
   @override
   void initialize() {
     super.initialize();
