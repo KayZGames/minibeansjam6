@@ -86,6 +86,7 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
               Controller(),
               Camera(),
               CanBeKilledByFallingObject(),
+              StoredMovement(),
             ]);
             break;
           case LevelObject.bean:
@@ -126,8 +127,6 @@ class LevelLoadingSystem extends _$LevelLoadingSystem {
           case LevelObject.end:
           case LevelObject.ghost:
             break;
-          case null:
-            throw Exception('no object at $x:$y');
         }
         final entity = world.createEntity(components);
         field.entity = entity;

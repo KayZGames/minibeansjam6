@@ -61,3 +61,7 @@ class Nebula extends Component {}
 class CanBeKilledByFallingObject extends Component {}
 
 enum PlayerState { stay, move, push, eat, finishLevel }
+
+class StoredMovement extends Component {
+  double value = 0;
+}

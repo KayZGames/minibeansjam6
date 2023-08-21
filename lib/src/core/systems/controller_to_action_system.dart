@@ -13,6 +13,7 @@ part 'controller_to_action_system.g.dart';
   allOf: [
     Controller,
     Position,
+    StoredMovement,
   ],
   manager: [
     LevelManager,
@@ -21,7 +22,8 @@ part 'controller_to_action_system.g.dart';
 )
 class ControllerToActionSystem extends _$ControllerToActionSystem {
   @override
-  void processEntity(int entity, Controller controller, Position position) {
+  void processEntity(int entity, Controller controller, Position position,
+      StoredMovement storedMovement) {
     if (controller.restart) {
       return;
     }
@@ -49,36 +51,45 @@ class ControllerToActionSystem extends _$ControllerToActionSystem {
       } else if (controller.state != PlayerState.stay) {
         if (controller.state == PlayerState.push) {
           levelManager.push(
-              position.x.floor() + moveX, position.y.floor(), moveX);
+              position.x + moveX, position.y, moveX);
         }
-        levelManager.startMovement(
-            position.x.floor(), position.y.floor(), moveX, moveY,
+        levelManager.startMovement(entity,
+            position.x, position.y, moveX, moveY,
             ghostAtOriginalLocation: true);
       }
     }
     if (controller.state != PlayerState.stay) {
-      final nextX = position.x + moveX * movementSpeed * world.delta;
-      final nextY = position.y + moveY * movementSpeed * world.delta;
+      final nextX = position.x +
+          moveX * movementSpeed * world.delta +
+          moveX * storedMovement.value;
+      final nextY = position.y +
+          moveY * movementSpeed * world.delta +
+          moveY * storedMovement.value;
       if (moveY < 0 && position.y.ceil() != nextY.ceil()) {
         levelManager.removeGhost(position.x.floor(), position.y.ceil());
         position.y = nextY.ceilToDouble();
         controller.state = PlayerState.stay;
+        storedMovement.value = (position.y - nextY).abs();
       } else if (moveY > 0 && position.y.floor() != nextY.floor()) {
         levelManager.removeGhost(position.x.floor(), position.y.floor());
         position.y = nextY.floorToDouble();
         controller.state = PlayerState.stay;
+        storedMovement.value = (position.y - nextY).abs();
       } else if (moveX < 0 && position.x.ceil() != nextX.ceil()) {
         levelManager.removeGhost(position.x.ceil(), position.y.floor());
         position.x = nextX.ceilToDouble();
         controller.state = PlayerState.stay;
+        storedMovement.value = (position.x - nextX).abs();
       } else if (moveX > 0 && position.x.floor() != nextX.floor()) {
         levelManager.removeGhost(position.x.floor(), position.y.floor());
         position.x = nextX.floorToDouble();
         controller.state = PlayerState.stay;
+        storedMovement.value = (position.x - nextX).abs();
       } else {
         position
           ..x = nextX
           ..y = nextY;
+        storedMovement.value = 0;
       }
     }
   }

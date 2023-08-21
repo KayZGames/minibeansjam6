@@ -90,8 +90,6 @@ class LevelManager extends _$LevelManager {
           return PlayerState.push;
         }
         return PlayerState.stay;
-      case null:
-        throw Exception('field@${field.x}:${field.y} is null');
     }
   }
 
@@ -109,8 +107,6 @@ class LevelManager extends _$LevelManager {
       case LevelObject.star:
       case LevelObject.bean:
         return true;
-      case null:
-        throw Exception('field@${field.x}:${field.y} is null');
     }
   }
 
@@ -156,8 +152,6 @@ class LevelManager extends _$LevelManager {
       case LevelObject.star:
       case LevelObject.bean:
         return false;
-      case null:
-        throw Exception('field@${field.x}:${field.y} is null');
     }
   }
 
@@ -239,7 +233,7 @@ class Level {
 
 class LevelField {
   final int x, y;
-  LevelObject? object;
+  LevelObject object;
   int? entity;
   LevelField(this.x, this.y, {this.object = LevelObject.empty, this.entity});
 }
